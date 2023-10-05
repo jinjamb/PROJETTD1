@@ -1,11 +1,12 @@
-package Jeu
+package src.Jeu;
 
 public class Player extends Characters {
-    protected Metier metier;
+    protected Job job;
     protected int niveau;
 
     // Constructeur
-    public Player(Metier metier, int niveau) {
-        this.metier = metier;
+    public class Player(Job job, int niveau) {
+        this.Job = job;
         this.niveau = niveau;
     }
+}
