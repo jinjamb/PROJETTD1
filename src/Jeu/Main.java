@@ -9,9 +9,9 @@ public class Main{
 
         lemo.talk("JE VAIS TE BUT2");
 
-        popo.Get_PV();
+        popo.Get_HP();
         lemo.hit(popo,4);
-        popo.Get_PV();
+        popo.Get_HP();
 
     }
 
