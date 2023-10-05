@@ -1,6 +1,7 @@
 package bin.Jeu;
-public class Cara{
+
+public class Cara {
     public static void main(String[] args) {
-        System.out.println("voila");
+        System.out.println("arabe");
     }
 }
