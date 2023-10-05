@@ -1,3 +1,4 @@
+
 package Jeu;
 
 public class Characters {
@@ -22,5 +23,3 @@ public class Characters {
     }
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
-    }
-}
