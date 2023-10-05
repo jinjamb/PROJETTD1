@@ -1,4 +1,4 @@
-package bin.Jeu;
+package src.Jeu;
 
 public class Cara {
     public static void main(String[] args) {
