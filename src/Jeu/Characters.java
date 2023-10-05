@@ -21,10 +21,13 @@ public class Characters {
     public void take_DMG(int n){
         this.PV_act-=n;
     }
-    public void hit(Character name,int n){
-        // name.take_DMG(n)
+    public void hit(Characters name,int n){
+        name.take_DMG(n);
     }
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
+    }
+    public void Get_PV(){
+        System.out.println(this.PV_act);
     }
 }
