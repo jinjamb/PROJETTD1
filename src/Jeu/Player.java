@@ -14,24 +14,37 @@ public class Player extends Characters {
 
     public void move(Places newPlace) {
         if (currentPlace.getAccessiblePlaces().contains(newPlace)) {
-            if (newPlace.hasMonsters()) {
-                System.out.println("You cannot move to " + newPlace.getName() + " as there are monsters!");
+            if (currentPlace.hasMonsters()) {
+                System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " car il y a des monstres !");
             } else {
                 currentPlace = newPlace;
-                System.out.println("You have moved to " + newPlace.getName());
+                System.out.println("Vous êtes maintenant à " + newPlace.getName());
             }
         } else {
-            System.out.println("You cannot move to " + newPlace.getName() + " from " + currentPlace.getName());
+            System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " depuis " + currentPlace.getName());
         }
     }
 
     public void rest() {
         if (currentPlace.hasMonsters()) {
-            System.out.println("You cannot rest here as there are monsters!");
+            System.out.println("Vous ne pouvez pas vous reposer ici car il y a des monstres !");
         } else {
-            PV_act = PV_max;
-            System.out.println("You have fully recovered your hit points!");
+            HP_act = HP_max;
+            System.out.println("Vous avez entièrement récupéré vos points de vie !");
         }
     }
+    public String getName() {
+        return this.name;
+    }
+
+    public Places getCurrentPlace() {
+        return currentPlace;
+    }
+
+    public String getJob() {
+        return job.getName(); 
+    }
+    
 }
+
 
