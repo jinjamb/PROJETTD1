@@ -3,12 +3,14 @@ package src.Jeu;
 public class Player extends Characters {
     protected Job job;
     protected int level;
+    protected int coins;
     private Places currentPlace;
 
     public Player(String name, Job job, Places startingPlace) {
         super(name);
         this.job = job;
         this.level = 1;
+        this.coins = 0;
         this.currentPlace = startingPlace;
     }
 
@@ -44,7 +46,14 @@ public class Player extends Characters {
     public String getJob() {
         return job.getName(); 
     }
+
+    public int getCoin(){
+        return this.coins;
+    }
     
+    public int getLevel(){
+        return this.level;
+    }
 }
 
 
