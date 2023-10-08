@@ -1,5 +1,4 @@
-
-package src.Jeu;
+package Jeu;
 
 public class Characters {
     protected String name;
@@ -27,7 +26,10 @@ public class Characters {
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
     }
-    public void Get_HP(){
-        System.out.println(this.HP_act);
+    public int Get_HP(){
+        return this.HP_act;
+    }
+    public int Get_HPMax(){
+        return this.HP_max;
     }
 }

@@ -1,4 +1,4 @@
-package src.Jeu;
+package Jeu;
 
 public class Npc {
     
