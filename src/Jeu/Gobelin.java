@@ -11,9 +11,9 @@ public class Gobelin extends Monsters {
     public Gobelin(String name) {
 
         super(name);
-        this.Mana_max = 25;
+        this.Mana_max = 35;
         this.Mana_act = Mana_max;
-        this.HP_max = 25;
+        this.HP_max = 30;
         this.HP_act = HP_max;
 
     }
