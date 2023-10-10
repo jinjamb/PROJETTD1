@@ -54,6 +54,11 @@ public class Player extends Characters {
     public int getLevel(){
         return this.level;
     }
+
+    public void addJob(Job job){
+        this.HP_max+=job.HPBonus;
+        this.damage+=job.damage;
+    }
 }
 
 

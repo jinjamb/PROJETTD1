@@ -2,11 +2,17 @@ package src.Jeu;
 
 import java.util.Scanner;
 
-public class Job {
+public class Job{
     private String name;
+    public int HPBonus;
+    public int damage;
+    public float successProbability;
 
-    public Job(String name) {
+    public Job(String name,int HPBonus, int damage , float successProbability) {
         this.name = name;
+        this.HPBonus = HPBonus;
+        this.damage = damage;
+        this.successProbability = successProbability;
     }
 
     public String getName() {
@@ -35,7 +41,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice1 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice1.equals("oui")) {
-                            selectedJob = new Job("Guerrier");
+                            selectedJob = new Knight();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice1.equals("non")) {
@@ -49,7 +55,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice2 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice2.equals("oui")) {
-                            selectedJob = new Job("Mage");
+                            selectedJob = new Magician();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice2.equals("non")) {
@@ -63,7 +69,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice3 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice3.equals("oui")) {
-                            selectedJob = new Job("Guerrier");
+                            selectedJob = new Magician();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice3.equals("non")) {

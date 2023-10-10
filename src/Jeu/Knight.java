@@ -1,8 +1,8 @@
 package src.Jeu;
 
-public class Fighter extends Job {
-    public Fighter() {
-        super("Guerrier");
+public class Knight extends Job {
+    public Knight() {
+        super("Chevalier",4,0,0);
         // Définissez ici les bonus spécifiques au guerrier
     }
 

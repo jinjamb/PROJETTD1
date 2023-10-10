@@ -7,6 +7,7 @@ public class Places {
     private String name;
     private List<Places> accessiblePlaces;
     private List<Monsters> monsters;
+    protected String background;
 
     public Places(String name) {
         this.name = name;
@@ -36,6 +37,9 @@ public class Places {
 
     public boolean hasMonsters() {
         return !monsters.isEmpty();
+    }
+    public String getBackground(){
+        return this.background;
     }
 }
 
