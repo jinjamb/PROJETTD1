@@ -20,29 +20,33 @@ public class Characters {
 
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public void take_DMG(int n){
         this.HP_act-=n;
     }
-    public void hit(Characters target) {
+    public void hit(Characters target,int damage) {
         double successProbability = 0.7;
         Random random = new Random();
         double randomValue = random.nextDouble();
 
         if (randomValue <= successProbability) {
-            int dmg = this.damage;
-            target.take_DMG(dmg);
+            target.take_DMG(damage);
             System.out.println(this.name + " attaque " + target.name + " et inflige " + damage + " dégâts.");
         } else {
             System.out.println(this.name + " a raté son attaque contre " + target.name + ".");
         }
     }
+
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
     }
-    public int Get_HP(){
+    public int getHP(){
         return HP_act;
     }
-    public int Get_HPMax(){
+    public int getHPMax(){
         return this.HP_max;
     }
 }

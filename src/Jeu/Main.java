@@ -71,10 +71,12 @@ public class Main {
         temple.addAccessiblePlace(passage);
         passage.addAccessiblePlace(temple);
         passage.addAccessiblePlace(forest);
-
-
         city.addAccessiblePlace(southroad);
         city.addAccessiblePlace(northraod);
+
+        Gobelin gobelin1 = new Gobelin("Dmitroff");
+        plain.addGobelin(gobelin1);
+
 
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
@@ -93,7 +95,7 @@ public class Main {
         
             System.out.print("Où voulez-vous vous déplacer ? Entrez le nom du lieu (ou tapez #quit pour quitter) : ");
             String input = scanner.nextLine();
-
+        
             if (input.equalsIgnoreCase("#quit")) {
                 quitGame = true;  // Si le joueur entre "#quit", mettez quitGame à vrai pour quitter le jeu
             } else {
@@ -104,11 +106,68 @@ public class Main {
                         break;
                     }
                 }
-
+        
                 if (destination != null) {
-                    joueur.move(destination);   
+                    joueur.move(destination);
                 } else {
                     System.out.println("DESTINATION INVALIDE. Vous ne pouvez pas vous déplacer là-bas.");
+                }
+            }
+            if (joueur.getHP() <= 0) {
+                System.out.println("Game Over");
+                quitGame = true;
+                break;
+            }
+        
+            for (Gobelin gobelin : joueur.getCurrentPlace().getGobelins()) {
+                if (gobelin.getHP() > 0) {
+                    System.out.println("Un gobelin (" + gobelin.getName() + ") se trouve ici !");
+                    boolean combatEnCours = true;
+                    
+                    while (combatEnCours) {
+                        System.out.println("Choisissez la cible pour votre attaque (entrez le nom du gobelin) : ");
+                        String targetName = scanner.nextLine();
+        
+                        // Trouvez le gobelin cible en fonction de son nom
+                        Gobelin targetGobelin = null;
+                        for (Gobelin g : joueur.getCurrentPlace().getGobelins()) {
+                            if (g.getName().equalsIgnoreCase(targetName)) {
+                                targetGobelin = g;
+                                break;
+                            }
+                        }
+                        if (targetGobelin != null) {
+                            joueur.hit(targetGobelin, joueur.damage);
+                            gobelin.getHP();
+                            if (targetGobelin.getHP() > 0) {
+                                gobelin.FurieSanguinaire(joueur);
+                                joueur.getHP();
+                            } else {
+                                System.out.println(targetGobelin.getName() + " a été vaincu !");
+                            }
+                        } else {
+                            System.out.println("Cible invalide ou déjà vaincue.");
+                        }
+        
+                        // Vérifiez si le joueur a perdu tous ses PV ou si tous les gobelins ont été vaincus pour mettre fin au combat.
+                        if (joueur.getHP() <= 0) {
+                            System.out.println("Game Over");
+                            quitGame = true;
+                            combatEnCours = false;
+                        } else {
+                            boolean tousLesGobelinsVaincus = true;
+                            for (Gobelin g : joueur.getCurrentPlace().getGobelins()) {
+                                if (g.getHP() > 0) {
+                                    tousLesGobelinsVaincus = false;
+                                    break;
+                                }
+                            }
+                            if (tousLesGobelinsVaincus) {
+                                System.out.println("Tous les gobelins ont été vaincus !");
+                                combatEnCours = false;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -124,7 +183,7 @@ public class Main {
         for (Places place : joueur.getCurrentPlace().getAccessiblePlaces()) {
             System.out.println("- " + place.getName());
         }
-        System.out.println("Points de vie du joueur : " + joueur.Get_HP());
+        System.out.println("Points de vie du joueur : " + joueur.getHP());
         System.out.println("Niveau du joueur: "+ joueur.getLevel());
         System.out.println("Argent du joueur: "+ joueur.getCoin());
     }

@@ -59,6 +59,10 @@ public class Player extends Characters {
         this.HP_max+=job.HPBonus;
         this.damage+=job.damage;
     }
+
+    public void setHP(int newHP) {
+        this.HP_act = newHP;
+    }
 }
 
 
