@@ -1,5 +1,6 @@
-package Jeu;
+package Game.DPlaces;
 
+import Game.*;
 import java.util.List;
 import java.util.ArrayList;
 

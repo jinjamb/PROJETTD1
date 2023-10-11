@@ -1,8 +1,8 @@
-package Jeu;
+package Game;
 
-public class Barbarian extends Job {
-    public Barbarian() {
-        super("Barbare");
+public class Magician extends Job {
+    public Magician() {
+        super("Mage");
         // Définissez ici les bonus spécifiques au mage
     }
 

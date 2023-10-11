@@ -1,5 +1,6 @@
-package Jeu;
+package Game;
 
+import Game.DPlaces.*;
 public class Player extends Characters {
     protected Job job;
     protected int level;

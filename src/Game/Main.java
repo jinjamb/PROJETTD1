@@ -1,5 +1,6 @@
-package Jeu;
+package Game;
 import java.util.Scanner;
+import Game.DPlaces.*;
 
 public class Main {
     public static void main(String[] args) {

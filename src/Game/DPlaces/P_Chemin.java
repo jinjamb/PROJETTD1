@@ -1,8 +1,8 @@
-package Jeu;
+package Game.DPlaces;
 
-public class P_Plaine extends Places {
-    public P_Plaine(){
-        super("Plaine");
+public class P_Chemin extends Places {
+    public P_Chemin(){
+        super("Chemin");
         this.background="=-=-=-=-=-=-=-=-=-=-=                                          &&&&&             &&&&&&&             \r\n" + //
         "| NOM: NOM_JOUEUR   |                                      &&&&&&&                   &&&&&        &&&\r\n" + //
         "| LVL: NIVEAU       |&&                                   &&&&&                        &&&&&    &&&  \r\n" + //

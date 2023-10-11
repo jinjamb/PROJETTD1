@@ -1,4 +1,4 @@
-package Jeu;
+package Game.DPlaces;
 
 public class P_Grotte extends Places {
     public P_Grotte(){

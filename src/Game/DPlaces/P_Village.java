@@ -1,8 +1,9 @@
-package Jeu;
+package Game.DPlaces;
 
-public class P_Chateau extends Places {
-    public P_Chateau(){
-        super("Chateau");
+
+public class P_Village extends Places {
+    public P_Village(){
+        super("Village");
         this.background="=-=-=-=-=-=-=-=-=-=-=                                          &&&&&             &&&&&&&             \r\n" + //
         "| NOM: NOM_JOUEUR   |                                      &&&&&&&                   &&&&&        &&&\r\n" + //
         "| LVL: NIVEAU       |&&                                   &&&&&                        &&&&&    &&&  \r\n" + //

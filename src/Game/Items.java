@@ -1,4 +1,4 @@
-package Jeu;
+package Game;
 
 public class Items {
     
