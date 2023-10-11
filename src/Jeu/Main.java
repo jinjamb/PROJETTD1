@@ -1,4 +1,5 @@
 package src.Jeu;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -6,76 +7,29 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Places village1 = new Places("village1");
-        Places plain = new Places("Plaine");
-        Places lake = new Places("Lac");
-        Places forest = new Places("Forêt");
-        Places ruins = new Places("Ruines");
-        Places orchard = new Places("Verger");
-        Places path1 = new Places("chemin1");
-        Places path2 = new Places("chemin2");
-        Places montain = new Places("Montagne");
-        Places cabain = new Places("Cabane");
-        Places castle = new Places("Chateau");
-        Places beacon = new Places("Phare");
-        Places sea = new Places("Mer");
-        Places cave = new Places("Grotte");
-        Places village2 = new Places("Village2");
+        Places padhiver = new Places("Padhiver");
         Places northraod = new Places("Route Nord");
-        Places city = new Places("Ville");
-        Places graveyard = new Places("Cimetière");
         Places southroad = new Places("Route Sud");
-        Places temple = new Places("Temple");
-        Places passage = new Places("Passage");
+        Places forest = new Places("Foret");
+        Places marsh = new Places("Marais des Morts");
+        Places crypt = new Places("Crypte");
+        Places volcano = new Places("Volcan");
 
-        village1.addAccessiblePlace(plain);
-        village1.addAccessiblePlace(forest);
-        plain.addAccessiblePlace(village1);
-        plain.addAccessiblePlace(lake);
-        plain.addAccessiblePlace(path1);
-        plain.addAccessiblePlace(path2);
-        forest.addAccessiblePlace(village1);
-        forest.addAccessiblePlace(ruins);
-        forest.addAccessiblePlace(passage);
-        lake.addAccessiblePlace(orchard);
-        lake.addAccessiblePlace(plain);
-        orchard.addAccessiblePlace(lake);
-        path1.addAccessiblePlace(montain);
-        path1.addAccessiblePlace(plain);
-        montain.addAccessiblePlace(path1);
-        montain.addAccessiblePlace(cabain);
-        montain.addAccessiblePlace(castle);
-        cabain.addAccessiblePlace(montain);
-        castle.addAccessiblePlace(montain);
-        path2.addAccessiblePlace(plain);
-        path2.addAccessiblePlace(beacon);
-        path2.addAccessiblePlace(sea);
-        sea.addAccessiblePlace(path2);
-        sea.addAccessiblePlace(beacon);
-        sea.addAccessiblePlace(cave);
-        sea.addAccessiblePlace(village2);
-        cave.addAccessiblePlace(sea);
-        village2.addAccessiblePlace(sea);
-        beacon.addAccessiblePlace(path2);
-        beacon.addAccessiblePlace(sea);
-        beacon.addAccessiblePlace(southroad);
-        southroad.addAccessiblePlace(beacon);
-        southroad.addAccessiblePlace(city);
-        city.addAccessiblePlace(southroad);
-        city.addAccessiblePlace(graveyard);
-        city.addAccessiblePlace(northraod);
-        graveyard.addAccessiblePlace(city);
-        northraod.addAccessiblePlace(city);
-        northraod.addAccessiblePlace(temple);
-        temple.addAccessiblePlace(northraod);
-        temple.addAccessiblePlace(passage);
-        passage.addAccessiblePlace(temple);
-        passage.addAccessiblePlace(forest);
-        city.addAccessiblePlace(southroad);
-        city.addAccessiblePlace(northraod);
+        padhiver.addAccessiblePlace(southroad);
+        padhiver.addAccessiblePlace(northraod);
+        northraod.addAccessiblePlace(forest);
+        northraod.addAccessiblePlace(padhiver);
+        southroad.addAccessiblePlace(marsh);
+        southroad.addAccessiblePlace(padhiver);
+        forest.addAccessiblePlace(northraod);
+        forest.addAccessiblePlace(volcano);
+        marsh.addAccessiblePlace(crypt);
+        marsh.addAccessiblePlace(southroad);
+        crypt.addAccessiblePlace(marsh);
+        volcano.addAccessiblePlace(forest);
 
         Gobelin gobelin1 = new Gobelin("Dmitroff");
-        plain.addGobelin(gobelin1);
+        forest.addGobelin(gobelin1);
 
 
         System.out.print("Entrez le nom du joueur : ");
@@ -85,71 +39,61 @@ public class Main {
             playerJob = Job.chooseJob(scanner);  // Tant que playerJob est null, continuez à demander à l'utilisateur de choisir un métier
         }
         
-        Player joueur = new Player(playerName, playerJob, village1);
+        Player joueur = new Player(playerName, playerJob, padhiver);
 
         boolean quitGame = false;
 
         while (!quitGame) {
-
             displayPlayerInfo(joueur);
+            Places currentPlace = joueur.getCurrentPlace();
+            System.out.println("Où voulez-vous vous déplacer ? Entrez le numéro du lieu (ou tapez -1 pour quitter) : ");
         
-            System.out.print("Où voulez-vous vous déplacer ? Entrez le nom du lieu (ou tapez #quit pour quitter) : ");
-            String input = scanner.nextLine();
+            List<Places> accessiblePlaces = currentPlace.getAccessiblePlaces();
+            for (int i = 0; i < accessiblePlaces.size(); i++) {
+                System.out.println((i + 1) + ". " + accessiblePlaces.get(i).getName());
+            }
         
-            if (input.equalsIgnoreCase("#quit")) {
+            int placeChoice = chooseNumber(scanner, accessiblePlaces);
+        
+            if (placeChoice == -1) {
                 quitGame = true;  // Si le joueur entre "#quit", mettez quitGame à vrai pour quitter le jeu
             } else {
-                Places destination = null;
-                for (Places place : joueur.getCurrentPlace().getAccessiblePlaces()) {
-                    if (place.getName().equalsIgnoreCase(input)) {
-                        destination = place;
-                        break;
-                    }
-                }
-        
-                if (destination != null) {
-                    joueur.move(destination);
-                } else {
-                    System.out.println("DESTINATION INVALIDE. Vous ne pouvez pas vous déplacer là-bas.");
-                }
+                Places destination = accessiblePlaces.get(placeChoice);
+                joueur.move(destination);
             }
+
             if (joueur.getHP() <= 0) {
                 System.out.println("Game Over");
                 quitGame = true;
                 break;
             }
-        
-            for (Gobelin gobelin : joueur.getCurrentPlace().getGobelins()) {
+
+            for (int i = 0; i < joueur.getCurrentPlace().getGobelins().size(); i++) {
+                Gobelin gobelin = joueur.getCurrentPlace().getGobelins().get(i);
                 if (gobelin.getHP() > 0) {
-                    System.out.println("Un gobelin (" + gobelin.getName() + ") se trouve ici !");
+                    System.out.println((i + 1) + ". Un gobelin (" + gobelin.getName() + ") se trouve ici !");
                     boolean combatEnCours = true;
-                    
+
                     while (combatEnCours) {
-                        System.out.println("Choisissez la cible pour votre attaque (entrez le nom du gobelin) : ");
-                        String targetName = scanner.nextLine();
-        
-                        // Trouvez le gobelin cible en fonction de son nom
-                        Gobelin targetGobelin = null;
-                        for (Gobelin g : joueur.getCurrentPlace().getGobelins()) {
-                            if (g.getName().equalsIgnoreCase(targetName)) {
-                                targetGobelin = g;
-                                break;
-                            }
-                        }
-                        if (targetGobelin != null) {
+                        System.out.println("Choisissez la cible pour votre attaque (entrez le numéro du gobelin) : ");
+                        int targetChoice = chooseNumber(scanner, joueur.getCurrentPlace().getGobelins());
+                    
+                        if (targetChoice == -1) {
+                            combatEnCours = false;
+                        } else {
+                            Gobelin targetGobelin = joueur.getCurrentPlace().getGobelins().get(targetChoice);
                             joueur.hit(targetGobelin, joueur.damage);
-                            gobelin.getHP();
+                            System.out.println("Vous avez attaqué " + targetGobelin.getName() + " et lui avez infligé " + joueur.damage + " points de dégâts.");
+                            System.out.println(targetGobelin.getName() + " a maintenant " + targetGobelin.getHP() + " points de vie.");
+                    
                             if (targetGobelin.getHP() > 0) {
                                 gobelin.FurieSanguinaire(joueur);
                                 joueur.getHP();
                             } else {
                                 System.out.println(targetGobelin.getName() + " a été vaincu !");
                             }
-                        } else {
-                            System.out.println("Cible invalide ou déjà vaincue.");
                         }
-        
-                        // Vérifiez si le joueur a perdu tous ses PV ou si tous les gobelins ont été vaincus pour mettre fin au combat.
+
                         if (joueur.getHP() <= 0) {
                             System.out.println("Game Over");
                             quitGame = true;
@@ -171,21 +115,34 @@ public class Main {
                 }
             }
         }
-        
+
         scanner.close();
     }
 
     private static void displayPlayerInfo(Player joueur) {
-        System.out.println("\nInformations du joueur :");
-        System.out.println("Nom du joueur : " + joueur.getName());
-        System.out.println("Lieu actuel du joueur : " + joueur.getCurrentPlace().getName());
-        System.out.println("Lieux accessibles depuis " + joueur.getCurrentPlace().getName() + ":");
-        for (Places place : joueur.getCurrentPlace().getAccessiblePlaces()) {
-            System.out.println("- " + place.getName());
+        // Afficher les informations du joueur
+    }
+
+    private static int chooseNumber(Scanner scanner, List<?> options) {
+        System.out.print("Entrez un numéro : ");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("#quit")) {
+            return -1;
         }
-        System.out.println("Points de vie du joueur : " + joueur.getHP());
-        System.out.println("Niveau du joueur: "+ joueur.getLevel());
-        System.out.println("Argent du joueur: "+ joueur.getCoin());
+
+        try {
+            int choice = Integer.parseInt(input);
+            if (choice >= 1 && choice <= options.size()) {
+                return choice - 1;
+            } else {
+                System.out.println("CHOIX INVALIDE. Veuillez choisir un numéro valide.");
+                return chooseNumber(scanner, options);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
+            return chooseNumber(scanner, options);
+        }
     }
 }
 

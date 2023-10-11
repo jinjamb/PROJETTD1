@@ -4,15 +4,11 @@ import java.util.Scanner;
 
 public class Job{
     private String name;
-    public int HPBonus;
-    public int damage;
-    public float successProbability;
+    protected int hp;
+    protected Items item;
 
-    public Job(String name,int HPBonus, int damage , float successProbability) {
+    public Job(String name) {
         this.name = name;
-        this.HPBonus = HPBonus;
-        this.damage = damage;
-        this.successProbability = successProbability;
     }
 
     public String getName() {
@@ -41,7 +37,7 @@ public class Job{
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice1 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice1.equals("oui")) {
-                            selectedJob = new Knight();
+                            selectedJob = new Barbarian();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice1.equals("non")) {

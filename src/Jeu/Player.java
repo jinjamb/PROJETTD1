@@ -55,11 +55,6 @@ public class Player extends Characters {
         return this.level;
     }
 
-    public void addJob(Job job){
-        this.HP_max+=job.HPBonus;
-        this.damage+=job.damage;
-    }
-
     public void setHP(int newHP) {
         this.HP_act = newHP;
     }
