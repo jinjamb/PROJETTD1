@@ -44,7 +44,8 @@ public class Main {
         }
 
         Player joueur = new Player(playerName, playerJob, padhiver);
-
+        Show.PrintPlace(joueur);
+        System.out.println(joueur.getName());
     }
 }
 
