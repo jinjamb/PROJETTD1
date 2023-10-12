@@ -1,32 +1,34 @@
 package src.Jeu;
-import java.util.List;
-import java.util.Scanner;
 
 import src.Jeu.Job.Job;
 import src.Jeu.Mob.Monsters;
 import src.Jeu.Mob.Gobelin;
 import src.Jeu.Pla.*;
 
+
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        Places padhiver = new Padhiver();
-        Places northraod = new Route_Nord();
-        Places southroad = new Route_Sud();
-        Places forest = new Foret();
-        Places marsh = new Marrais();
-        Places crypt = new Crypte();
-        Places volcano = new Volcan();
+        Places padhiver = new Places("Padhiver");
+        Places northroad = new Places("Route Nord");
+        Places southroad = new Places("Route Sud");
+        Places forest = new Places("Foret");
+        Places marsh = new Places("Marais des Morts");
+        Places crypt = new Places("Crypte");
+        Places volcano = new Places("Volcan");
 
         padhiver.addAccessiblePlace(southroad);
-        padhiver.addAccessiblePlace(northraod);
-        northraod.addAccessiblePlace(forest);
-        northraod.addAccessiblePlace(padhiver);
+        padhiver.addAccessiblePlace(northroad);
+        northroad.addAccessiblePlace(forest);
+        northroad.addAccessiblePlace(padhiver);
         southroad.addAccessiblePlace(marsh);
         southroad.addAccessiblePlace(padhiver);
-        forest.addAccessiblePlace(northraod);
+        forest.addAccessiblePlace(northroad);
         forest.addAccessiblePlace(volcano);
         marsh.addAccessiblePlace(crypt);
         marsh.addAccessiblePlace(southroad);
@@ -36,14 +38,13 @@ public class Main {
         Monsters gobelin1 = new Gobelin("Dmitroff");
         forest.addMonster(gobelin1);
 
-
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
         Job playerJob = null;
         while (playerJob == null) {
-            playerJob = Job.chooseJob(scanner);  // Tant que playerJob est null, continuez à demander à l'utilisateur de choisir un métier
+            playerJob = Job.chooseJob(scanner);
         }
-        
+
         Player joueur = new Player(playerName, playerJob, padhiver);
 
         boolean quitGame = false;
@@ -51,77 +52,86 @@ public class Main {
         while (!quitGame) {
             displayPlayerInfo(joueur);
             Places currentPlace = joueur.getCurrentPlace();
-            System.out.println("Où voulez-vous vous déplacer ? Entrez le numéro du lieu (ou tapez -1 pour quitter) : ");
         
-            List<Places> accessiblePlaces = currentPlace.getAccessiblePlaces();
-            for (int i = 0; i < accessiblePlaces.size(); i++) {
-                System.out.println((i + 1) + ". " + accessiblePlaces.get(i).getName());
-            }
-        
-            int placeChoice = chooseNumber(scanner, accessiblePlaces);
-        
-            if (placeChoice == -1) {
-                quitGame = true;  // Si le joueur entre "#quit", mettez quitGame à vrai pour quitter le jeu
+            List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
+
+            if (!monstersInCurrentPlace.isEmpty()) {
+                System.out.println("Des monstres se trouvent dans ce lieu !");
+                for (int i = 0; i < monstersInCurrentPlace.size(); i++) {
+                    System.out.println((i + 1) + ". Un " + monstersInCurrentPlace.get(i).getName() + " se trouve ici !");
+                }
             } else {
-                Places destination = accessiblePlaces.get(placeChoice);
-                joueur.move(destination);
+                System.out.println("Il n'y a aucun ennemi ici.");
             }
-
-            if (joueur.getHP() <= 0) {
-                System.out.println("Game Over");
-                quitGame = true;
-                break;  
-            }
-
-            for (int i = 0; i < currentPlace.getMonsters().size(); i++) {
-                Monsters monster = currentPlace.getMonsters().get(i);
-                if (monster.getHP() > 0) {
-                    System.out.println((i + 1) + ". Un " + monster.getName() + " se trouve ici !");
-                    boolean combatEnCours = true;
-            
-                    while (combatEnCours) {
-                        System.out.println("Choisissez la cible pour votre attaque (entrez le numéro du monstre) : ");
-                        int targetChoice = chooseNumber(scanner, currentPlace.getMonsters());
-                        
-                        if (targetChoice == -1) {
-                            combatEnCours = false;
+        
+            System.out.println("Que voulez-vous faire ?");
+            System.out.println("1. Se déplacer");
+            System.out.println("2. Se battre");
+            System.out.println("3. Se reposer");
+            S   ystem.out.println("4. Quitter le jeu");
+            System.out.print("Entrez le numéro de votre choix : ");
+        
+            String choiceStr = scanner.nextLine();
+        
+            try {
+                int choice = Integer.parseInt(choiceStr);
+        
+                switch (choice) {
+                    case 1:
+                        if (areMonstersAlive(currentPlace)) {
+                            System.out.println("Impossible de se déplacer avec des monstres encore en vie autour.");
                         } else {
-                            Monsters targetMonster = currentPlace.getMonsters().get(targetChoice);
-                            joueur.hit(targetMonster, joueur.damage);
-                            System.out.println("Vous avez attaqué " + targetMonster.getName() + " et lui avez infligé " + joueur.damage + " points de dégâts.");
-                            System.out.println(targetMonster.getName() + " a maintenant " + targetMonster.getHP() + " points de vie.");
-                            
-                            if (targetMonster.getHP() > 0) {
-                                // Vous pouvez ajouter des actions spécifiques au monstre ici si nécessaire
-                                joueur.getHP();
-                            } else {
-                                System.out.println(targetMonster.getName() + " a été vaincu !");
+                            List<Places> accessiblePlaces = currentPlace.getAccessiblePlaces();
+                            System.out.println("Lieux accessibles :");
+                            for (int i = 0; i < accessiblePlaces.size(); i++) {
+                                System.out.println((i + 1) + ". " + accessiblePlaces.get(i).getName());
+                            }
+                            int placeChoice = chooseNumber(scanner, accessiblePlaces);
+                            if (placeChoice != -1) {
+                                Places destination = accessiblePlaces.get(placeChoice);
+                                joueur.move(destination);
                             }
                         }
-            
-                        if (joueur.getHP() <= 0) {
-                            System.out.println("Game Over");
-                            quitGame = true;
-                            combatEnCours = false;
-                        } else {
-                            boolean tousLesMonstresVaincus = true;
-                            for (Monsters m : currentPlace.getMonsters()) {
-                                if (m.getHP() > 0) {
-                                    tousLesMonstresVaincus = false;
-                                    break;
+                    case 2:
+                        // Option "Se battre"
+                        if (!monstersInCurrentPlace.isEmpty()) {
+                            System.out.println("Monstres présents :");
+                            for (int i = 0; i < monstersInCurrentPlace.size(); i++) {
+                                Monsters monster = monstersInCurrentPlace.get(i);
+                                if (monster.getHP() > 0) {
+                                    System.out.println((i + 1) + ". " + monster.getName());
                                 }
                             }
-                            if (tousLesMonstresVaincus) {
-                                System.out.println("Tous les monstres ont été vaincus !");
-                                combatEnCours = false;
+                            int monsterChoice = chooseNumber(scanner, monstersInCurrentPlace);
+                            if (monsterChoice != -1) {
+                                // Ajoutez ici la logique pour démarrer un combat contre le monstre choisi.
+                                System.out.println("Vous vous battez contre " + monstersInCurrentPlace.get(monsterChoice).getName());
+                            } else {
+                                System.out.println("Aucun ennemi en vie ici.");
                             }
+                        } else {
+                            System.out.println("Aucun ennemi ici.");
                         }
-                    }
+                        break;
+                    case 3:
+                        // Option "Se reposer"
+                        System.out.println("Vous vous reposez et récupérez vos points de vie.");
+                        // Ajoutez ici la logique pour rétablir les points de vie du joueur.
+                        break;
+                    case 4:
+                        // Option "Quitter le jeu"
+                        quitGame = true;
+                        break;
+                    default:
+                        System.out.println("Choix invalide. Veuillez choisir un numéro valide.");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
             }
         }
+
         scanner.close();
-    }
+    }   
 
     private static void displayPlayerInfo(Player joueur) {
         // Afficher les informations du joueur
@@ -148,6 +158,17 @@ public class Main {
             return chooseNumber(scanner, options);
         }
     }
+
+    private static boolean areMonstersAlive(Places place) {
+        List<Monsters> monstersInPlace = place.getMonsters();
+        for (Monsters monster : monstersInPlace) {
+            if (monster.getHP() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
 
 
