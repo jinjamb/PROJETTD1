@@ -4,7 +4,8 @@ public class Route_Nord extends Places{
     
     public Route_Nord(){
         super("Route Nord");
-        this.background="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
+        this.background=
+                "=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
                 "| PV:  Act/Max      |                                                                                \r\n" + //

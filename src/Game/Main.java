@@ -6,12 +6,13 @@ import Game.Job.*;
 import Game.Mob.*;
 import Game.Pla.*;
 
+
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-
-        Places padhiver = new Places("Padhiver");
+        Padhiver pad = new Padhiver();
+        Places padhiver = new Padhiver();
         Places northraod = new Places("Route Nord");
         Places southroad = new Places("Route Sud");
         Places forest = new Places("Foret");
@@ -44,6 +45,8 @@ public class Main {
         }
         
         Player joueur = new Player(playerName, playerJob, padhiver);
+
+        Show.PrintPlace(joueur);
 
         boolean quitGame = false;
 
