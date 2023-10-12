@@ -1,6 +1,5 @@
 package Game;
 
-import Game.DPlaces.*;
 public class Player extends Characters {
     protected Job job;
     protected int level;
@@ -54,6 +53,10 @@ public class Player extends Characters {
     
     public int getLevel(){
         return this.level;
+    }
+
+    public void setHP(int newHP) {
+        this.HP_act = newHP;
     }
 }
 

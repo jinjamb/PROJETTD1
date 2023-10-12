@@ -2,8 +2,10 @@ package Game;
 
 import java.util.Scanner;
 
-public class Job {
+public class Job{
     private String name;
+    protected int hp;
+    protected Items item;
 
     public Job(String name) {
         this.name = name;
@@ -35,7 +37,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice1 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice1.equals("oui")) {
-                            selectedJob = new Job("Guerrier");
+                            selectedJob = new Barbarian();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice1.equals("non")) {
@@ -49,7 +51,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice2 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice2.equals("oui")) {
-                            selectedJob = new Job("Mage");
+                            selectedJob = new Magician();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice2.equals("non")) {
@@ -63,7 +65,7 @@ public class Job {
                         System.out.println("Entrez 'oui' pour confirmer ou 'non' pour refuser.");
                         String confirmChoice3 = scanner.nextLine().trim().toLowerCase();
                         if (confirmChoice3.equals("oui")) {
-                            selectedJob = new Job("Guerrier");
+                            selectedJob = new Magician();
                             System.out.println("Vous avez choisi d'être un Guerrier.");
                             break;
                         } else if (confirmChoice3.equals("non")) {

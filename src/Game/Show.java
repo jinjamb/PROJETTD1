@@ -3,18 +3,10 @@ package Game;
 public class Show{
     
 
-    public static void printFight(Player p,Monsters m){//List<Monstre> lm){
-
-    }
-
-    public static void printJobs(Job j){
-
-    }
-
-    public static void printLand(Player p){
+    public static void Print(Player p){
         String name=p.getName();
-        String HP =  String.valueOf(p.Get_HP());
-        String HPMax = String.valueOf(p.Get_HPMax());
+        String HP =  String.valueOf(p.getHP());
+        String HPMax = String.valueOf(p.getHPMax());
         String Lvl = String.valueOf(p.getLevel());
 
         String bg=p.getCurrentPlace().getBackground();
