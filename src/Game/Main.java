@@ -11,14 +11,14 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Padhiver pad = new Padhiver();
+
         Places padhiver = new Padhiver();
-        Places northraod = new Places("Route Nord");
-        Places southroad = new Places("Route Sud");
-        Places forest = new Places("Foret");
-        Places marsh = new Places("Marais des Morts");
-        Places crypt = new Places("Crypte");
-        Places volcano = new Places("Volcan");
+        Places northraod = new Route_Nord();
+        Places southroad = new Route_Sud();
+        Places forest = new Foret();
+        Places marsh = new Marrais();
+        Places crypt = new Crypte();
+        Places volcano = new Volcan();
 
         padhiver.addAccessiblePlace(southroad);
         padhiver.addAccessiblePlace(northraod);
@@ -51,6 +51,8 @@ public class Main {
         boolean quitGame = false;
 
         while (!quitGame) {
+            Show.PrintPlace(joueur);
+
             displayPlayerInfo(joueur);
             Places currentPlace = joueur.getCurrentPlace();
             System.out.println("Où voulez-vous vous déplacer ? Entrez le numéro du lieu (ou tapez -1 pour quitter) : ");
