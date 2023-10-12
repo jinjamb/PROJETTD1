@@ -1,4 +1,4 @@
-package src.Jeu;
+package src.Jeu.Job;
 
 public class Barbarian extends Job{
     public Barbarian(){

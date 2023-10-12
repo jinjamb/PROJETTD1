@@ -1,6 +1,10 @@
-package src.Jeu;
+package src.Jeu.Job;
 
 import java.util.Scanner;
+
+import src.Jeu.Job.Magician;
+import src.Jeu.Ite.Items;
+import src.Jeu.Job.Barbarian;
 
 public class Job{
     private String name;

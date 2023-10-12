@@ -1,5 +1,8 @@
 package src.Jeu;
 
+import src.Jeu.Job.Job;
+import src.Jeu.Pla.Places;
+
 public class Player extends Characters {
     protected Job job;
     protected int level;

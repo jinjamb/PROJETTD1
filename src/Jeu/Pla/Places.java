@@ -1,6 +1,10 @@
-package src.Jeu;
+package src.Jeu.Pla;
 
 import java.util.List;
+
+//import Game.*;
+import src.Jeu.Mob.*;
+
 import java.util.ArrayList;
 
 public class Places {
@@ -8,7 +12,7 @@ public class Places {
     private List<Places> accessiblePlaces;
     private List<Monsters> monsters;
     private List<Gobelin> gobelins = new ArrayList<>();
-    protected String background;
+    protected String background="";
 
     public Places(String name) {
         this.name = name;
@@ -49,6 +53,9 @@ public class Places {
         gobelins.add(gobelin);
     }
 }
+
+
+
 
 
 

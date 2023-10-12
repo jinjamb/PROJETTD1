@@ -2,18 +2,23 @@ package src.Jeu;
 import java.util.List;
 import java.util.Scanner;
 
+import src.Jeu.Job.Job;
+import src.Jeu.Mob.Monsters;
+import src.Jeu.Mob.Gobelin;
+import src.Jeu.Pla.*;
+
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        Places padhiver = new Places("Padhiver");
-        Places northraod = new Places("Route Nord");
-        Places southroad = new Places("Route Sud");
-        Places forest = new Places("Foret");
-        Places marsh = new Places("Marais des Morts");
-        Places crypt = new Places("Crypte");
-        Places volcano = new Places("Volcan");
+        Places padhiver = new Padhiver();
+        Places northraod = new Route_Nord();
+        Places southroad = new Route_Sud();
+        Places forest = new Foret();
+        Places marsh = new Marrais();
+        Places crypt = new Crypte();
+        Places volcano = new Volcan();
 
         padhiver.addAccessiblePlace(southroad);
         padhiver.addAccessiblePlace(northraod);
@@ -28,8 +33,8 @@ public class Main {
         crypt.addAccessiblePlace(marsh);
         volcano.addAccessiblePlace(forest);
 
-        Gobelin gobelin1 = new Gobelin("Dmitroff");
-        forest.addGobelin(gobelin1);
+        Monsters gobelin1 = new Gobelin("Dmitroff");
+        forest.addMonster(gobelin1);
 
 
         System.out.print("Entrez le nom du joueur : ");
@@ -65,49 +70,49 @@ public class Main {
             if (joueur.getHP() <= 0) {
                 System.out.println("Game Over");
                 quitGame = true;
-                break;
+                break;  
             }
 
-            for (int i = 0; i < joueur.getCurrentPlace().getGobelins().size(); i++) {
-                Gobelin gobelin = joueur.getCurrentPlace().getGobelins().get(i);
-                if (gobelin.getHP() > 0) {
-                    System.out.println((i + 1) + ". Un gobelin (" + gobelin.getName() + ") se trouve ici !");
+            for (int i = 0; i < currentPlace.getMonsters().size(); i++) {
+                Monsters monster = currentPlace.getMonsters().get(i);
+                if (monster.getHP() > 0) {
+                    System.out.println((i + 1) + ". Un " + monster.getName() + " se trouve ici !");
                     boolean combatEnCours = true;
-
+            
                     while (combatEnCours) {
-                        System.out.println("Choisissez la cible pour votre attaque (entrez le numéro du gobelin) : ");
-                        int targetChoice = chooseNumber(scanner, joueur.getCurrentPlace().getGobelins());
-                    
+                        System.out.println("Choisissez la cible pour votre attaque (entrez le numéro du monstre) : ");
+                        int targetChoice = chooseNumber(scanner, currentPlace.getMonsters());
+                        
                         if (targetChoice == -1) {
                             combatEnCours = false;
                         } else {
-                            Gobelin targetGobelin = joueur.getCurrentPlace().getGobelins().get(targetChoice);
-                            joueur.hit(targetGobelin, joueur.damage);
-                            System.out.println("Vous avez attaqué " + targetGobelin.getName() + " et lui avez infligé " + joueur.damage + " points de dégâts.");
-                            System.out.println(targetGobelin.getName() + " a maintenant " + targetGobelin.getHP() + " points de vie.");
-                    
-                            if (targetGobelin.getHP() > 0) {
-                                gobelin.FurieSanguinaire(joueur);
+                            Monsters targetMonster = currentPlace.getMonsters().get(targetChoice);
+                            joueur.hit(targetMonster, joueur.damage);
+                            System.out.println("Vous avez attaqué " + targetMonster.getName() + " et lui avez infligé " + joueur.damage + " points de dégâts.");
+                            System.out.println(targetMonster.getName() + " a maintenant " + targetMonster.getHP() + " points de vie.");
+                            
+                            if (targetMonster.getHP() > 0) {
+                                // Vous pouvez ajouter des actions spécifiques au monstre ici si nécessaire
                                 joueur.getHP();
                             } else {
-                                System.out.println(targetGobelin.getName() + " a été vaincu !");
+                                System.out.println(targetMonster.getName() + " a été vaincu !");
                             }
                         }
-
+            
                         if (joueur.getHP() <= 0) {
                             System.out.println("Game Over");
                             quitGame = true;
                             combatEnCours = false;
                         } else {
-                            boolean tousLesGobelinsVaincus = true;
-                            for (Gobelin g : joueur.getCurrentPlace().getGobelins()) {
-                                if (g.getHP() > 0) {
-                                    tousLesGobelinsVaincus = false;
+                            boolean tousLesMonstresVaincus = true;
+                            for (Monsters m : currentPlace.getMonsters()) {
+                                if (m.getHP() > 0) {
+                                    tousLesMonstresVaincus = false;
                                     break;
                                 }
                             }
-                            if (tousLesGobelinsVaincus) {
-                                System.out.println("Tous les gobelins ont été vaincus !");
+                            if (tousLesMonstresVaincus) {
+                                System.out.println("Tous les monstres ont été vaincus !");
                                 combatEnCours = false;
                             }
                         }
@@ -115,7 +120,6 @@ public class Main {
                 }
             }
         }
-
         scanner.close();
     }
 
