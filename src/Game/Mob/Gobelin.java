@@ -1,6 +1,8 @@
-package Game;
+package Game.Mob;
 
 import java.util.Random;
+
+import Game.*;
 
 public class Gobelin extends Monsters {
 

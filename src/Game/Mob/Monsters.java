@@ -1,4 +1,6 @@
-package Game;
+package Game.Mob;
+
+import Game.Characters;
 
 public class Monsters extends Characters {
 

@@ -2,6 +2,9 @@ package Game;
 import java.util.List;
 import java.util.Scanner;
 
+import Game.Mob.*;
+import Game.Pla.*;
+
 public class Main {
     public static void main(String[] args) {
 

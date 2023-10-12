@@ -2,6 +2,8 @@ package Game;
 
 import java.util.Random;
 
+import Game.Mob.Monsters;
+
 public class Skeletons extends Monsters {
 
     protected int LameSquelettique;

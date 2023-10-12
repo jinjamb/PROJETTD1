@@ -1,6 +1,10 @@
-package Game;
+package Game.Pla;
 
 import java.util.List;
+
+//import Game.*;
+import Game.Mob.*;
+
 import java.util.ArrayList;
 
 public class Places {
