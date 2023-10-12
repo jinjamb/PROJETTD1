@@ -68,7 +68,7 @@ public class Main {
             System.out.println("1. Se déplacer");
             System.out.println("2. Se battre");
             System.out.println("3. Se reposer");
-            S   ystem.out.println("4. Quitter le jeu");
+            System.out.println("4. Quitter le jeu");
             System.out.print("Entrez le numéro de votre choix : ");
         
             String choiceStr = scanner.nextLine();
