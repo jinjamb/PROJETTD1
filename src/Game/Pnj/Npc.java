@@ -1,4 +1,4 @@
-package Game;
+package Game.Pnj;
 
 public class Npc {
     
