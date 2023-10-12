@@ -23,6 +23,7 @@ public class Necromancer extends Monsters {
             super.Attack(name);
             this.HP_act += 6;
             this.damage = 8;
+            this.Mana_act -= 5;
 
         } else {
 

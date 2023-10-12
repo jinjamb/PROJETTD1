@@ -23,6 +23,7 @@ public class Dragon extends Monsters {
             super.Attack(name);
             this.HP_act += 6;
             this.damage = 12;
+            this.Mana_act -= 8;
 
         } else {
 
