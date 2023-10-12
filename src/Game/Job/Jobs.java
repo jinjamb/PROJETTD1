@@ -1,13 +1,16 @@
-package Game;
+package Game.Job;
 
 import java.util.Scanner;
 
-public class Job{
+import Game.*;
+import Game.Ite.*;
+
+public class Jobs{
     private String name;
     protected int hp;
     protected Items item;
 
-    public Job(String name) {
+    public Jobs(String name) {
         this.name = name;
     }
 
@@ -15,8 +18,8 @@ public class Job{
         return name;
     }
 
-    public static Job chooseJob(Scanner scanner) {
-        Job selectedJob = null;
+    public static Jobs chooseJob(Scanner scanner) {
+        Jobs selectedJob = null;
     
         while (selectedJob == null) {
             System.out.println("Choisissez un métier :");

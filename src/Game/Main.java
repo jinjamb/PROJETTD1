@@ -2,6 +2,7 @@ package Game;
 import java.util.List;
 import java.util.Scanner;
 
+import Game.Job.*;
 import Game.Mob.*;
 import Game.Pla.*;
 
@@ -37,9 +38,9 @@ public class Main {
 
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
-        Job playerJob = null;
+        Jobs playerJob = null;
         while (playerJob == null) {
-            playerJob = Job.chooseJob(scanner);  // Tant que playerJob est null, continuez à demander à l'utilisateur de choisir un métier
+            playerJob = Jobs.chooseJob(scanner);  // Tant que playerJob est null, continuez à demander à l'utilisateur de choisir un métier
         }
         
         Player joueur = new Player(playerName, playerJob, padhiver);

@@ -1,6 +1,6 @@
-package Game;
+package Game.Job;
 
-public class Magician extends Job {
+public class Magician extends Jobs {
     public Magician() {
         super("Mage");;
     }

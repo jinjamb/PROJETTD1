@@ -1,6 +1,8 @@
 package Game;
 
-public class Barbarian extends Job{
+import Game.Job.Jobs;
+
+public class Barbarian extends Jobs{
     public Barbarian(){
         super("Barbare");
     }

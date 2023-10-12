@@ -1,4 +1,4 @@
-package Game;
+package Game.Ite;
 
 public class Items {
     
