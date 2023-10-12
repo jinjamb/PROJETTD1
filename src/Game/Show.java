@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Job.*;
+
 public class Show{
     
 
@@ -24,8 +26,16 @@ public class Show{
 
         System.out.println(bg);
     }
-    public static void PrintChoice(){
+    public static void PrintPres(Player player,Job job){
         
+    }
+    public static void PrintChoice(String Name,Job job){
+        for(int i=Name.length();i<"Nom_Joueur".length();i++){Name += " ";}
+        
+        String Illu=job.getIllu();
+        Illu = Illu.replace("NOM_JOUEUR",Name);
+
+        System.out.println(Illu);
     }
 
 }

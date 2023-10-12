@@ -1,5 +1,5 @@
 package Game.Ite;
 
-public class Items {
+public abstract class Items {
     
 }

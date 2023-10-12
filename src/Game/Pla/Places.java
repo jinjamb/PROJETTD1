@@ -7,7 +7,7 @@ import Game.Mob.*;
 
 import java.util.ArrayList;
 
-public class Places {
+public abstract class Places {
     private String name;
     private List<Places> accessiblePlaces;
     private List<Monsters> monsters;

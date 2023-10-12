@@ -40,7 +40,7 @@ public class Main {
         String playerName = scanner.nextLine();
         Job playerJob = null;
         while (playerJob == null) {
-            playerJob = Job.chooseJob(scanner);
+            playerJob = Job.chooseJob(playerName,scanner);
         }
 
         Player joueur = new Player(playerName, playerJob, padhiver);

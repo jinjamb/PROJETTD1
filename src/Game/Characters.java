@@ -1,6 +1,6 @@
 package Game;
 
-public class Characters {
+public abstract class Characters {
     protected String name;
     protected int HP_max;
     protected int HP_act;
