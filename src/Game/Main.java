@@ -36,6 +36,14 @@ public class Main {
         Gobelin gobelin1 = new Gobelin("Dmitroff");
         forest.addGobelin(gobelin1);
 
+        System.out.print("Entrez le nom du joueur : ");
+        String playerName = scanner.nextLine();
+        Job playerJob = null;
+        while (playerJob == null) {
+            playerJob = Job.chooseJob(scanner);
+        }
+
+        Player joueur = new Player(playerName, playerJob, padhiver);
 
     }
 }

@@ -1,8 +1,8 @@
 package Game.Job;
 
-public class Magician extends Job {
-    public Magician() {
-        super("Mage");
+public class Warrior extends Job{
+    public Warrior(){
+        super("Guerrier");
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: 1            |                            &&&&&&&&&&&&&                                       \r\n" + //
@@ -39,5 +39,5 @@ public class Magician extends Job {
                 "=-=-=-=-=-=-=-=-=-=-=   =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  \r\n" + //
                 "";
     }
-
+    
 }

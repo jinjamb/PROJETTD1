@@ -3,6 +3,7 @@ package Game;
 public class Show{
     
 
+
     public static void PrintPlace(Player p){
         String name=p.getName();
         String HP =  String.valueOf(p.getHP());
@@ -22,6 +23,9 @@ public class Show{
         bg = bg.replace("NIVEAU", Lvl);
 
         System.out.println(bg);
+    }
+    public static void PrintChoice(){
+        
     }
 
 }

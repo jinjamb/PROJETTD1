@@ -1,15 +1,15 @@
 package Game;
 
-import Game.Job.Jobs;
+import Game.Job.Job;
 import Game.Pla.Places;
 
 public class Player extends Characters {
-    protected Jobs job;
+    protected Job job;
     protected int level;
     protected int coins;
     private Places currentPlace;
 
-    public Player(String name, Jobs job, Places startingPlace) {
+    public Player(String name, Job job, Places startingPlace) {
         super(name);
         this.job = job;
         this.level = 1;
