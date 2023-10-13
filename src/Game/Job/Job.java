@@ -57,58 +57,68 @@ public class Job{
         return name;
     }
 
+
     public static Job chooseJob(String name,Scanner scanner) {
         Job selectedJob = new Job("null");
 
-        boolean select=true;
-    
-        while (select) {
-            Show.PrintChoice(name,selectedJob);
+        boolean confirm=false;
+        boolean choix=false;
+
+
+        Show.PrintChoice(name,selectedJob);
+
+        while (!choix) {
             
             System.out.print("Choix:");
+            
             String choiceStr = scanner.nextLine();
-    
             try {
                 int choice = Integer.parseInt(choiceStr);
-    
-                switch (choice) {
-                    case 1:
-                        selectedJob = new Barbarian();
-                        System.out.println("bar");
-                        break;
-                    case 2:
-                        selectedJob = new Warrior();
-                        System.out.println("war");
-                        break;
-                    case 3:
-                        selectedJob = new Magician();
-                        System.out.println("mag");
-                        break;
-                        
-                    default:
-                        System.out.println("Choix invalide. Veuillez choisir un numéro valide.");
-                        break;
+                if(choice==1){selectedJob = new Barbarian();}
+                else if(choice==2){selectedJob = new Warrior();}
+                else if(choice==3){selectedJob = new Magician();}
+                else{
+                    System.out.println("Choix invalide. Veuillez choisir un numéro valide.");
+                    continue;
+                }
+                Show.PrintChoice(name,selectedJob);
+                while(!confirm){
+                    
+                    System.out.print("Choix:");
+                    try{
+                        choiceStr = scanner.nextLine();
+                        int confirmChoice1 = Integer.parseInt(choiceStr);
+                        if (confirmChoice1==1) {
+                            choix=true;
+                            confirm=true;
+                            break;
+                        } else if (confirmChoice1==2) {
+                            selectedJob.Illustration=selectedJob.Pres;
+                            Show.PrintChoice(name,selectedJob);
+                            break;
+                        } else {
+                            System.out.println("Choix invalide.");
+                            System.out.print("Choix:");
+                        }
+                    }catch (NumberFormatException e){
+                        System.out.println("Choix invalide.");
+                        System.out.print("Choix:");
                     }
-            } catch (NumberFormatException e) {
-                System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
-                System.out.print("Choix:");
-            }
-            Show.PrintChoice(name,selectedJob);
-            System.out.print("Choix:");
-            int confirmChoice1 = Integer.parseInt(scanner.nextLine());
-            if (confirmChoice1==1) {
-                break;
-            } else if (confirmChoice1==2) {
-                selectedJob.Illustration=selectedJob.Pres;
-            } else {
-                System.out.println("Choix invalide.");
-                System.out.print("Choix:");
-            }
- 
-        }
+                }
 
+                } catch (NumberFormatException e) {
+                    System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
+                    System.out.print("Choix:");
+                    continue;
+                }
+
+            
+            
+ 
+        }   
         return selectedJob;
     }
+    
     public String getIllu(){
         return this.Illustration;
     }

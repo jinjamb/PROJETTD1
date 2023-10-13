@@ -52,6 +52,15 @@ public abstract class Places {
     public void addGobelin(Gobelin gobelin) {
         gobelins.add(gobelin);
     }
+    public static boolean areMonstersAlive(Places place) {
+        List<Monsters> monstersInPlace = place.getMonsters();
+        for (Monsters monster : monstersInPlace) {
+            if (monster.getHP() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 
