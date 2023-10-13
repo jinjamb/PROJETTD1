@@ -36,6 +36,8 @@ public class Main {
         Gobelin gobelin1 = new Gobelin("Dmitroff");
         forest.addGobelin(gobelin1);
 
+        northraod.addMonster(gobelin1);
+
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
         Job playerJob = null;
@@ -50,6 +52,8 @@ public class Main {
         boolean quitGame = false;
 
         while (!quitGame) {
+            System.out.println(joueur.getCurrentPlace());
+            System.out.println(joueur.getCurrentPlace().hasMonsters());
             Show.PrintPlace(joueur,0);
             String choiceStr = scanner.nextLine();
             Places currentPlace = joueur.getCurrentPlace();
