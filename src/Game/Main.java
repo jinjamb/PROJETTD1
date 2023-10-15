@@ -79,10 +79,18 @@ public class Main {
                 System.out.println("2");
         }
 
-
-        System.out.print("Entrez le nom du joueur : ");
-        String playerName = scanner.nextLine();
         Job playerJob = null;
+        String playerName;
+        while(true){
+            System.out.print("Entrez le nom du joueur : ");
+            playerName = scanner.nextLine();
+            if (playerName.length()<=10){
+                break;
+            }else{System.out.println("Le nom du joueur ne peut pas dépasser 10 caractères");}
+        }
+        
+        
+        
         
         playerJob = Job.chooseJob(playerName,scanner);
         
@@ -91,7 +99,6 @@ public class Main {
         
         System.out.println(joueur.getName());
 
-        boolean quitGame = false;
         boolean print=true;
 
         while (joueur.getHP()>0 && joueur.getLevel()<10) {
