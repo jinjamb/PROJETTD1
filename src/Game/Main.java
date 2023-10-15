@@ -297,8 +297,11 @@ public class Main {
                                 mobdmg=m.getDmg();
                                 MobAttac=m.getAttakName();
                             }
+                        }else{
+                            mobdmg=m.getDmg();
+                            MobAttac=m.getAttakName();
                         }
-                    m.hit(p,m.getDmg());
+                    m.hit(p,mobdmg);
                 }
                 
                 Show.fight(p, m);
