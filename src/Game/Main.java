@@ -107,7 +107,6 @@ public class Main {
             if(print){Show.PrintPlace(joueur,0);}else{print=true;}
             String choiceStr = scanner.nextLine();
             Places currentPlace = joueur.getCurrentPlace();
-            //List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
 
             try {
                 int choice = Integer.parseInt(choiceStr);
