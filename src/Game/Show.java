@@ -66,17 +66,17 @@ public class Show{
             ActDescrip="Monstres:";
             Monsters m1=place.getMonsters().get(0);
             Act1=m1.getName();
-            if(m1.getHP()==0){posi1="Mort";}else{posi1="Vivant";}
+            if(m1.getHP()<=0){posi1="Mort";}else{posi1="Vivant";}
 
             if(place.getMonsters().size()>=2){
                 Monsters m2=place.getMonsters().get(1);
                 Act2=m2.getName();
-                if(m2.getHP()==0){posi2="Mort";}else{posi2="Vivant";}
+                if(m2.getHP()<=0){posi2="Mort";}else{posi2="Vivant";}
             }
             if(place.getMonsters().size()>=3){
                 Monsters m2=place.getMonsters().get(1);
                 Act3=m2.getName();
-                if(m2.getHP()==0){posi3="Mort";}else{posi3="Vivant";}
+                if(m2.getHP()<=0){posi3="Mort";}else{posi3="Vivant";}
             }
         }
         ActDescrip = complet(ActDescrip,"AAAAAAAAAAAAAA");

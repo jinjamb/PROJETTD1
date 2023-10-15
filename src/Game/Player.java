@@ -73,6 +73,7 @@ public class Player extends Characters {
     public void lvlup(){
         this.HP_max+=this.job.getHp();
         this.Mana_max+=this.job.getMana();
+        this.level+=1;
     }
     public void hit(Monsters m,int n){
         m.takeDmg(n);

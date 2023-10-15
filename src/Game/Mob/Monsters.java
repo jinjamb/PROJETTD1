@@ -1,9 +1,13 @@
 package Game.Mob;
 
 import Game.Characters;
+import java.util.Random;
 
 public abstract class Monsters extends Characters {
     String texture="";
+    int magicDmg=0;
+    int heal=0;
+    int spellPrice=0;
 
     public Monsters(String name) {
 
@@ -14,6 +18,7 @@ public abstract class Monsters extends Characters {
         this.HP_act = HP_max;
         this.damage = 0;
 
+
     }
 
     public String getTexture(){
@@ -21,5 +26,25 @@ public abstract class Monsters extends Characters {
     }
     public int getDmg(){
         return this.damage;
+    }
+    public boolean spell(Characters p){
+        if(this.Mana_act<this.spellPrice){
+            hit(p,this.getDmg());
+            return false;
+        }else{
+            Random r = new Random();
+            int n = r.nextInt(2);
+            if (n==1){
+                this.hit(p,this.magicDmg);
+                this.Mana_act-=this.spellPrice;
+                return true;
+            }else{
+                this.hit(p,this.getDmg());
+                return false;
+            }
+        }
+    }
+    public int getMagicDmg(){
+        return this.magicDmg;
     }
 }

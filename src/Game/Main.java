@@ -5,7 +5,9 @@ import java.util.Scanner;
 import Game.Job.*;
 import Game.Mob.*;
 import Game.Pla.*;
-import Game.*;
+//import Game.*;
+
+
 
 
 public class Main {
@@ -35,10 +37,28 @@ public class Main {
         volcano.addAccessiblePlace(forest);
 
         Gobelin gobelin1 = new Gobelin("Dmitroff");
-        Bat bat1 = new Bat("batm");
+        Gobelin gobelin2 = new Gobelin("Gobby");
+
+        Orc orc1 = new Orc("Orc");
+        Orc orc2 = new Orc("lorc");
+
+        Bat bat1 = new Bat("batun");
+        Bat bat2 = new Bat("batdeu");
+        Bat bat3 = new Bat("battroa");
+
+        Necromancer nec = new Necromancer("Necromant");
+
+        Dragon Dragon = new Dragon("Dragon2Shrek");
+
+        southroad.addMonster(orc1);
+        southroad.addMonster(orc2);
+        forest.addMonster(gobelin2);
         forest.addMonster(gobelin1);
-        
-        northraod.addMonster(bat1);
+        marsh.addMonster(bat1);
+        marsh.addMonster(bat3);
+        marsh.addMonster(bat2);
+        crypt.addMonster(nec);
+        volcano.addMonster(Dragon);
 
 
         System.out.print("Entrez le nom du joueur : ");
@@ -64,7 +84,7 @@ public class Main {
             if(print){Show.PrintPlace(joueur,0);}else{print=true;}
             String choiceStr = scanner.nextLine();
             Places currentPlace = joueur.getCurrentPlace();
-            List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
+            //List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
 
             try {
                 int choice = Integer.parseInt(choiceStr);
@@ -94,6 +114,8 @@ public class Main {
                     if(res==-1){
                         System.out.println("YOU DIE!!!");
                         break;
+                    }else{
+                        joueur.lvlup();
                     }
                 }
                 else if(choice==3){
@@ -169,6 +191,14 @@ public class Main {
                     p.hit(m,p.getJob().getDmg(p.getLevel()));
                     
                     if(m.getHP()>0){
+                        if(m.getManaMax()>0){
+                            if(m.spell(p)){
+                                Show.fight(p, m);
+                                System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
+                                System.out.println(m.getName()+"vous a infligé "+ m.getMagicDmg()+" dégats");
+                                continue;
+                            }
+                        }
                         m.hit(p,m.getDmg());
                     }
                     

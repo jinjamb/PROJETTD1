@@ -12,6 +12,10 @@ public class Necromancer extends Monsters {
         this.Mana_max = 10;
         this.Mana_act = Mana_max;
         this.damage = 8;
+
+        this.heal=6;
+        this.magicDmg=12;
+        this.spellPrice=5;
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
@@ -50,18 +54,17 @@ public class Necromancer extends Monsters {
 
     }
 
-    public void LifeTransfer(Characters name) {
+    public boolean LifeTransfer(Characters name) {
 
         if (Mana_act >= 5) {
             hit(name,12);
 
             this.HP_act += 6;
             this.Mana_act -= 5;
+            return true;
 
         } else {
-
-            System.out.println("Mana insuffisante.");
-
+            return false;
         }
 
     }
