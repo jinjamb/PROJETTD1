@@ -40,7 +40,11 @@ public class Player extends Characters {
             System.out.println("Vous ne pouvez pas vous reposer ici car il y a des monstres !");
         } else {
             this.heal();
-            System.out.println("Vous avez entièrement récupéré vos points de vie !");
+            if(this.Mana_max>0){
+                System.out.println("Vous avez entièrement récupéré vos points de vie !\nvous avez donc "+this.HP_act+" HP et "+this.Mana_act+" Mana" );
+            }else{
+                System.out.println("Vous avez entièrement récupéré vos points de vie !\nvous avez donc "+this.HP_act+" HP");
+            }
         }
     }
     public String getName() {

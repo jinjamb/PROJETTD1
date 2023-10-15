@@ -13,6 +13,7 @@ import Game.Pnj.*;
 public class Main {
     public static void main(String[] args) {
 
+
         Scanner scanner = new Scanner(System.in);
 
         Places padhiver = new Padhiver();
@@ -68,7 +69,7 @@ public class Main {
         northraod.addVillager(pnj3);
         southroad.addVillager(pnj2);
 
-
+        System.out.println(padhiver.areMonstersAlive());
         int choix = 1;
 
         switch(choix){
@@ -79,17 +80,23 @@ public class Main {
                 System.out.println("2");
         }
 
-
-        System.out.print("Entrez le nom du joueur : ");
-        String playerName = scanner.nextLine();
         Job playerJob = null;
+        String playerName;
+        while(true){
+            System.out.print("Entrez le nom du joueur : ");
+            playerName = scanner.nextLine();
+            if (playerName.length()<=10){
+                break;
+            }else{System.out.println("Le nom du joueur ne peut pas dépasser 10 caractères");}
+        }
+        
+        
+        
         
         playerJob = Job.chooseJob(playerName,scanner);
         
 
         Player joueur = new Player(playerName, playerJob, padhiver);
-        
-        System.out.println(joueur.getName());
 
         boolean print=true;
 
@@ -99,7 +106,6 @@ public class Main {
             if(print){Show.PrintPlace(joueur,0);}else{print=true;}
             String choiceStr = scanner.nextLine();
             Places currentPlace = joueur.getCurrentPlace();
-            //List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
 
             try {
                 int choice = Integer.parseInt(choiceStr);
@@ -119,9 +125,17 @@ public class Main {
                 }
                 else if(choice==2){
                     if(!currentPlace.areMonstersAlive()){
-                        System.out.println("Tout les monstres sont mort");
-                        print=false;
-                        continue;
+                        if(!currentPlace.hasMonsters()){
+                            System.out.println("Aucun ennemi ici");
+                            print=false;
+                            continue;
+                        }
+                        else{
+                            System.out.println("Tout les monstres sont mort");
+                            print=false;
+                            continue;
+                        }
+
                     }
                     Show.PrintPlace(joueur,2);
                     int n=chooseMonster(scanner, currentPlace.getMonsters());
@@ -146,11 +160,13 @@ public class Main {
                         if(currentPlace.areMonstersAlive()){
                             int n=chooseNpc(scanner,currentPlace.getNpc());
                             Show.talk(joueur,currentPlace.getNpc().get(n),true);
+                            System.out.println("Tapez une touche");
                             scanner.nextLine();
 
                         }else{
                             int n=chooseNpc(scanner,currentPlace.getNpc());
                             Show.talk(joueur,currentPlace.getNpc().get(n),false);
+                            System.out.println("Tapez une touche");
                             scanner.nextLine();
                         }
                     }else{
@@ -167,7 +183,11 @@ public class Main {
             }
 
         }
-        Show.fin(joueur,true ,scanner);
+        if(joueur.getHP()<=0){
+            Show.fin(joueur,false ,scanner);
+        }else{
+            Show.fin(joueur,true ,scanner);
+        }
 
 
     }
@@ -278,6 +298,7 @@ public class Main {
                                 MobAttac=m.getAttakName();
                             }
                         }
+                        //else dmg mobs
                     m.hit(p,m.getDmg());
                 }
                 
@@ -300,7 +321,3 @@ public class Main {
     }
 
 }
-
-
-
-
