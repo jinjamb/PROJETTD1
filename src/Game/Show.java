@@ -36,10 +36,10 @@ public class Show{
 
         if(action==0){
             ActDescrip="";
-            Act1="se deplacer";
-            Act2="se battre";
-            Act3="se reposer";
-            Act4="parler avec";
+            Act1="1.se deplacer";
+            Act2="2.se battre";
+            Act3="3.se reposer";
+            Act4="4.parler avec";
             if(place.areMonstersAlive()){
                 posi1="(Impossible)";
                 posi2="(Possible)";
@@ -61,10 +61,10 @@ public class Show{
         else if(action==1){
             ActDescrip="Lieux:";
             List<Places> accessiblePlaces = place.getAccessiblePlaces();
-            Act1=accessiblePlaces.get(0).getName();
+            Act1="1."+accessiblePlaces.get(0).getName();
 
             if(accessiblePlaces.size()==2){
-                Act2=accessiblePlaces.get(1).getName();
+                Act2="2."+accessiblePlaces.get(1).getName();
             }
             Act3="";
             Act4="";
@@ -72,51 +72,51 @@ public class Show{
         else if(action==2){
             ActDescrip="Monstres:";
             Monsters m1=place.getMonsters().get(0);
-            Act1=m1.getName();
+            Act1="1."+m1.getName();
             if(m1.getHP()<=0){posi1="(Mort)";}else{posi1="(Vivant)";}
 
             if(place.getMonsters().size()>=2){
                 Monsters m2=place.getMonsters().get(1);
-                Act2=m2.getName();
+                Act2="2."+m2.getName();
                 if(m2.getHP()<=0){posi2="(Mort)";}else{posi2="(Vivant)";}
             }
             if(place.getMonsters().size()>=3){
                 Monsters m3=place.getMonsters().get(1);
-                Act3=m3.getName();
+                Act3="3."+m3.getName();
                 if(m3.getHP()<=0){posi3="(Mort)";}else{posi3="(Vivant)";}
             }
         }
         else if(action==3){
             ActDescrip="Villageois:";
             Npc m1=place.getNpc().get(0);
-            Act1=m1.getName();
+            Act1="1."+m1.getName();
             
             if(place.getNpc().size()>=2){
                 Npc m2=place.getNpc().get(1);
-                Act2=m2.getName();
+                Act2="2."+m2.getName();
             }
         }
         ActDescrip = complet(ActDescrip,"AAAAAAAAAAAAAA");
-        Act1 = complet(Act1, "BBBBBBBBBBBBBBB");
-        Act2 = complet(Act2, "BBBBBBBBBBBBBBB");
-        Act3 = complet(Act3, "DDDDDDDDDDDDDD");
-        Act4 = complet(Act4, "EEEEEEEEEEEEEE");
+        Act1 = complet(Act1, "1.BBBBBBBBBBBBBBB");
+        Act2 = complet(Act2, "2.BBBBBBBBBBBBBBB");
+        Act3 = complet(Act3, "3.DDDDDDDDDDDDDD");
+        Act4 = complet(Act4, "4.EEEEEEEEEEEEEE");
         posi1 = complet(posi1, "bbbbbbbbbbbb");
         posi2 = complet(posi2, "bbbbbbbbbbbb");
         posi3 = complet(posi3, "bbbbbbbbbbbb");
         posi4 = complet(posi4, "bbbbbbbbbbbb");
 
         bg = bg.replace("AAAAAAAAAAAAAA", ActDescrip);
-        bg = bg.replace("BBBBBBBBBBBBBBB",Act1);
+        bg = bg.replace("1.BBBBBBBBBBBBBBB",Act1);
         bg = bg.replace("bbbbbbbbbbbb",posi1);
 
-        bg = bg.replace("CCCCCCCCCCCCCCC",Act2);
+        bg = bg.replace("2.CCCCCCCCCCCCCCC",Act2);
         bg = bg.replace("cccccccccccc",posi2);
 
-        bg = bg.replace("DDDDDDDDDDDDDD",Act3);
+        bg = bg.replace("3.DDDDDDDDDDDDDD",Act3);
         bg = bg.replace("dddddddddddd",posi3);
 
-        bg = bg.replace("EEEEEEEEEEEEEE",Act4);
+        bg = bg.replace("4.EEEEEEEEEEEEEE",Act4);
         bg = bg.replace("eeeeeeeeeeee",posi4);
 
         System.out.println(bg);

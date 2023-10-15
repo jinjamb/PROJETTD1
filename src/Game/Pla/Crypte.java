@@ -3,8 +3,9 @@ package Game.Pla;
 public class Crypte extends Places{
     public Crypte(){
         super("Crypte");
-        this.background="=-=-=-=-=-=-=-=-=-=-=&&&&&&&                         &&            &&&&&&                   &&       \r\n" + //
-        "| NOM: NOM_JOUEUR   |     &&&&                       &&            &&                     &&&&       \r\n" + //
+        this.background=
+        "=-=-=-=-=-=-=-=-=-=-=&&&&&&&                             Crypte                             &&       \r\n" + //
+        "| NOM: NOM_JOUEUR   |     &&&&                                                            &&&&       \r\n" + //
         "| LVL: NIVEAU       |       &&&&                   &&&&&&&&&&&&&&&&&&                &&&&&&&         \r\n" + //
         "| PV:  Act/Max      |         &&&&            &&&&&&&              &&&&&&        &&&&                \r\n" + //
         "| Mana: Act/Max     |            &&&&     &&&&&&                        &&&&  &&&&                   \r\n" + //
