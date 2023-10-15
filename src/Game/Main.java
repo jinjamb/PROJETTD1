@@ -280,7 +280,7 @@ public class Main {
                     p.downmana(2);
                 }else if(choice==3 && p.getManaMax()!=0){
                     if(p.getMana()<9){System.out.println("Mana insufisant");continue;}
-                    if(p.level<6){playerdmg=15;}else{playerdmg=15;}
+                    if(p.level<6){playerdmg=15;}else{playerdmg=30;}
                     playerAttac="Boule de feu";
                     p.downmana(9);
                 }else{
@@ -306,8 +306,8 @@ public class Main {
                 
                 Show.fight(p, m);
                 System.out.println(p.getName()+" utilise "+playerAttac+": "+m.getName()+" a pris "+ playerdmg +" dégats");
-                System.out.println(m.getName()+" utilise "+MobAttac+" cela vous inflige "+ mobdmg+" dégats");
-
+                
+                if(m.getHP()>0){System.out.println(m.getName()+" utilise "+MobAttac+" cela vous inflige "+ mobdmg+" dégats");}
 
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
