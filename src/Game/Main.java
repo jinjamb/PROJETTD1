@@ -90,8 +90,19 @@ public class Main {
                     }
                     Show.PrintPlace(joueur,2);
                     int n=chooseMonster(scanner, currentPlace.getMonsters());
-                    fight(joueur,currentPlace.getMonsters().get(n),scanner);
-
+                    int res= fight(joueur,currentPlace.getMonsters().get(n),scanner);
+                    if(res==-1){
+                        System.out.println("YOU DIE!!!");
+                        break;
+                    }
+                }
+                else if(choice==3){
+                    joueur.rest();
+                }
+                else if(choice==4){
+                    //
+                }else{
+                    System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
@@ -156,14 +167,25 @@ public class Main {
                 int choise = Integer.parseInt(input);
                 if (choise==1){
                     p.hit(m,p.getJob().getDmg(p.getLevel()));
-                    System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+"Dégats");
+                    
+                    if(m.getHP()>0){
+                        m.hit(p,m.getDmg());
+                    }
+                    
                     Show.fight(p, m);
+                    System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
+                    System.out.println(m.getName()+"vous a infligé "+ m.getDmg()+" dégats");
+
                 }
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
             }
         }
-        return -1;
+        if(p.getHP()<=0){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 
 }

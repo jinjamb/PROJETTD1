@@ -19,4 +19,7 @@ public abstract class Monsters extends Characters {
     public String getTexture(){
         return this.texture;
     }
+    public int getDmg(){
+        return this.damage;
+    }
 }

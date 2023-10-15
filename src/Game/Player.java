@@ -24,22 +24,22 @@ public class Player extends Characters {
 
     public void move(Places newPlace) {
         if (currentPlace.getAccessiblePlaces().contains(newPlace)) {
-            if (currentPlace.hasMonsters()) {
+            if (currentPlace.areMonstersAlive()) {
                 System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " car il y a des monstres !");
             } else {
                 currentPlace = newPlace;
                 System.out.println("Vous êtes maintenant à " + newPlace.getName());
             }
         } else {
-            System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " depuis " + currentPlace.getName());
+            //System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " depuis " + currentPlace.getName());
         }
     }
 
     public void rest() {
-        if (currentPlace.hasMonsters()) {
+        if (currentPlace.areMonstersAlive()) {
             System.out.println("Vous ne pouvez pas vous reposer ici car il y a des monstres !");
         } else {
-            HP_act = HP_max;
+            this.heal();
             System.out.println("Vous avez entièrement récupéré vos points de vie !");
         }
     }
@@ -61,6 +61,9 @@ public class Player extends Characters {
     
     public int getLevel(){
         return this.level;
+    }
+    public void heal(){
+        this.HP_act=this.HP_max;
     }
 
     public void setHP(int newHP) {
