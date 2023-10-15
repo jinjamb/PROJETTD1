@@ -54,7 +54,9 @@ public abstract class Places {
     public String getBackground(){
         return this.background;
     }
-
+    public boolean hasNpc(){
+        return !villagers.isEmpty();
+    }
     public boolean areMonstersAlive() {
         List<Monsters> monstersInPlace = this.getMonsters();
         for (Monsters monster : monstersInPlace) {

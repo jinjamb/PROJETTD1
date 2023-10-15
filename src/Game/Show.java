@@ -44,12 +44,17 @@ public class Show{
                 posi1="(Impossible)";
                 posi2="(Possible)";
                 posi3="(Impossible)";
-                posi4="(Possible)";
+                
             }else{
                 posi1="(Possible)";
                 posi2="(Impossible)";
                 posi3="(Possible)";
+                
+            }
+            if(place.hasNpc()){
                 posi4="(Possible)";
+            }else{
+                posi4="(Impossible)";
             }
         }
 

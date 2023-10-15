@@ -142,16 +142,21 @@ public class Main {
                     print=false;
                 }
                 else if(choice==4){
-                    Show.PrintPlace(joueur,3);
-                    if(currentPlace.areMonstersAlive()){
-                        int n=chooseNpc(scanner,currentPlace.getNpc());
-                        Show.talk(joueur,currentPlace.getNpc().get(n),true);
-                        scanner.nextLine();
+                    if(currentPlace.hasNpc()){
+                        Show.PrintPlace(joueur,3);
+                        if(currentPlace.areMonstersAlive()){
+                            int n=chooseNpc(scanner,currentPlace.getNpc());
+                            Show.talk(joueur,currentPlace.getNpc().get(n),true);
+                            scanner.nextLine();
 
+                        }else{
+                            int n=chooseNpc(scanner,currentPlace.getNpc());
+                            Show.talk(joueur,currentPlace.getNpc().get(n),false);
+                            scanner.nextLine();
+                        }
                     }else{
-                        int n=chooseNpc(scanner,currentPlace.getNpc());
-                        Show.talk(joueur,currentPlace.getNpc().get(n),false);
-                        scanner.nextLine();
+                        System.out.println("Pas de Villageois ici!");
+                        print=false;
                     }
                 }else{
                     System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
