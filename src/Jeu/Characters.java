@@ -7,6 +7,7 @@ public class Characters {
     //protected Places place;
     protected int Mana_max;
     protected int Mana_act;
+    protected int damage;
 
     public Characters(String name){
         this.Mana_act=0;
@@ -14,19 +15,29 @@ public class Characters {
         this.name=name;
         this.HP_act=10;
         this.HP_max=10;
+        this.damage=3;
 
     }
 
-    public void take_DMG(int n){
+    public String getName(){
+        return this.name;
+    }
+
+    public void takeDmg(int n){
         this.HP_act-=n;
     }
-    public void hit(Characters name,int n){
-        name.take_DMG(n);
+    public void hit(Characters name, int n) {
+        name.takeDmg(n);
     }
+
+
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
     }
-    public int Get_HP(){
+    public int getHP(){
         return HP_act;
+    }
+    public int getHPMax(){
+        return this.HP_max;
     }
 }

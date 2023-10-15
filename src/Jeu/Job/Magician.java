@@ -1,9 +1,8 @@
-package src.Jeu;
+package src.Jeu.Job;
 
 public class Magician extends Job {
     public Magician() {
-        super("Mage");
-        // Définissez ici les bonus spécifiques au mage
+        super("Mage");;
     }
 
     public void showDescription() {

@@ -1,12 +1,18 @@
-package src.Jeu;
+package src.Jeu.Pla;
 
 import java.util.List;
+
+//import Game.*;
+import src.Jeu.Mob.*;
+
 import java.util.ArrayList;
 
 public class Places {
     private String name;
     private List<Places> accessiblePlaces;
     private List<Monsters> monsters;
+    private List<Gobelin> gobelins = new ArrayList<>();
+    protected String background="";
 
     public Places(String name) {
         this.name = name;
@@ -37,7 +43,19 @@ public class Places {
     public boolean hasMonsters() {
         return !monsters.isEmpty();
     }
+    public String getBackground(){
+        return this.background;
+    }
+    public List<Gobelin> getGobelins() {
+        return gobelins;
+    }
+    public void addGobelin(Gobelin gobelin) {
+        gobelins.add(gobelin);
+    }
 }
+
+
+
 
 
 

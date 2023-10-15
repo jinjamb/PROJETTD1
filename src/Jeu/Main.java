@@ -1,4 +1,12 @@
 package src.Jeu;
+
+import src.Jeu.Job.Job;
+import src.Jeu.Mob.Monsters;
+import src.Jeu.Mob.Gobelin;
+import src.Jeu.Pla.*;
+
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -6,128 +14,161 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Places village1 = new Places("village1");
-        Places plain = new Places("Plaine");
-        Places lake = new Places("Lac");
-        Places forest = new Places("Forêt");
-        Places ruins = new Places("Ruines");
-        Places orchard = new Places("Verger");
-        Places path1 = new Places("chemin1");
-        Places path2 = new Places("chemin2");
-        Places montain = new Places("Montagne");
-        Places cabain = new Places("Cabane");
-        Places castle = new Places("Chateau");
-        Places beacon = new Places("Phare");
-        Places sea = new Places("Mer");
-        Places cave = new Places("Grotte");
-        Places village2 = new Places("Village2");
-        Places northraod = new Places("Route Nord");
-        Places city = new Places("Ville");
-        Places graveyard = new Places("Cimetière");
+        Places padhiver = new Places("Padhiver");
+        Places northroad = new Places("Route Nord");
         Places southroad = new Places("Route Sud");
-        Places temple = new Places("Temple");
-        Places passage = new Places("Passage");
+        Places forest = new Places("Foret");
+        Places marsh = new Places("Marais des Morts");
+        Places crypt = new Places("Crypte");
+        Places volcano = new Places("Volcan");
 
-        village1.addAccessiblePlace(plain);
-        village1.addAccessiblePlace(forest);
-        plain.addAccessiblePlace(village1);
-        plain.addAccessiblePlace(lake);
-        plain.addAccessiblePlace(path1);
-        plain.addAccessiblePlace(path2);
-        forest.addAccessiblePlace(village1);
-        forest.addAccessiblePlace(ruins);
-        forest.addAccessiblePlace(passage);
-        lake.addAccessiblePlace(orchard);
-        lake.addAccessiblePlace(plain);
-        orchard.addAccessiblePlace(lake);
-        path1.addAccessiblePlace(montain);
-        path1.addAccessiblePlace(plain);
-        montain.addAccessiblePlace(path1);
-        montain.addAccessiblePlace(cabain);
-        montain.addAccessiblePlace(castle);
-        cabain.addAccessiblePlace(montain);
-        castle.addAccessiblePlace(montain);
-        path2.addAccessiblePlace(plain);
-        path2.addAccessiblePlace(beacon);
-        path2.addAccessiblePlace(sea);
-        sea.addAccessiblePlace(path2);
-        sea.addAccessiblePlace(beacon);
-        sea.addAccessiblePlace(cave);
-        sea.addAccessiblePlace(village2);
-        cave.addAccessiblePlace(sea);
-        village2.addAccessiblePlace(sea);
-        beacon.addAccessiblePlace(path2);
-        beacon.addAccessiblePlace(sea);
-        beacon.addAccessiblePlace(southroad);
-        southroad.addAccessiblePlace(beacon);
-        southroad.addAccessiblePlace(city);
-        city.addAccessiblePlace(southroad);
-        city.addAccessiblePlace(graveyard);
-        city.addAccessiblePlace(northraod);
-        graveyard.addAccessiblePlace(city);
-        northraod.addAccessiblePlace(city);
-        northraod.addAccessiblePlace(temple);
-        temple.addAccessiblePlace(northraod);
-        temple.addAccessiblePlace(passage);
-        passage.addAccessiblePlace(temple);
-        passage.addAccessiblePlace(forest);
+        padhiver.addAccessiblePlace(southroad);
+        padhiver.addAccessiblePlace(northroad);
+        northroad.addAccessiblePlace(forest);
+        northroad.addAccessiblePlace(padhiver);
+        southroad.addAccessiblePlace(marsh);
+        southroad.addAccessiblePlace(padhiver);
+        forest.addAccessiblePlace(northroad);
+        forest.addAccessiblePlace(volcano);
+        marsh.addAccessiblePlace(crypt);
+        marsh.addAccessiblePlace(southroad);
+        crypt.addAccessiblePlace(marsh);
+        volcano.addAccessiblePlace(forest);
 
-
-        city.addAccessiblePlace(southroad);
-        city.addAccessiblePlace(northraod);
+        Monsters gobelin1 = new Gobelin("Dmitroff");
+        forest.addMonster(gobelin1);
 
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
         Job playerJob = null;
         while (playerJob == null) {
-            playerJob = Job.chooseJob(scanner);  // Tant que playerJob est null, continuez à demander à l'utilisateur de choisir un métier
+            playerJob = Job.chooseJob(scanner);
         }
-        
-        Player joueur = new Player(playerName, playerJob, village1);
+
+        Player joueur = new Player(playerName, playerJob, padhiver);
 
         boolean quitGame = false;
 
         while (!quitGame) {
-
             displayPlayerInfo(joueur);
+            Places currentPlace = joueur.getCurrentPlace();
         
-            System.out.print("Où voulez-vous vous déplacer ? Entrez le nom du lieu (ou tapez #quit pour quitter) : ");
-            String input = scanner.nextLine();
+            List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
 
-            if (input.equalsIgnoreCase("#quit")) {
-                quitGame = true;  // Si le joueur entre "#quit", mettez quitGame à vrai pour quitter le jeu
+            if (!monstersInCurrentPlace.isEmpty()) {
+                System.out.println("Des monstres se trouvent dans ce lieu !");
+                for (int i = 0; i < monstersInCurrentPlace.size(); i++) {
+                    System.out.println((i + 1) + ". Un " + monstersInCurrentPlace.get(i).getName() + " se trouve ici !");
+                }
             } else {
-                Places destination = null;
-                for (Places place : joueur.getCurrentPlace().getAccessiblePlaces()) {
-                    if (place.getName().equalsIgnoreCase(input)) {
-                        destination = place;
+                System.out.println("Il n'y a aucun ennemi ici.");
+            }
+        
+            System.out.println("Que voulez-vous faire ?");
+            System.out.println("1. Se déplacer");
+            System.out.println("2. Se battre");
+            System.out.println("3. Se reposer");
+            System.out.println("4. Quitter le jeu");
+            System.out.print("Entrez le numéro de votre choix : ");
+        
+            String choiceStr = scanner.nextLine();
+        
+            try {
+                int choice = Integer.parseInt(choiceStr);
+        
+                switch (choice) {
+                    case 1:
+                        if (areMonstersAlive(currentPlace)) {
+                            System.out.println("Impossible de se déplacer avec des monstres encore en vie autour.");
+                        } else {
+                            List<Places> accessiblePlaces = currentPlace.getAccessiblePlaces();
+                            System.out.println("Lieux accessibles :");
+                            for (int i = 0; i < accessiblePlaces.size(); i++) {
+                                System.out.println((i + 1) + ". " + accessiblePlaces.get(i).getName());
+                            }
+                            int placeChoice = chooseNumber(scanner, accessiblePlaces);
+                            if (placeChoice != -1) {
+                                Places destination = accessiblePlaces.get(placeChoice);
+                                joueur.move(destination);
+                            }
+                        }
+                    case 2:
+                        // Option "Se battre"
+                        if (!monstersInCurrentPlace.isEmpty()) {
+                            System.out.println("Monstres présents :");
+                            for (int i = 0; i < monstersInCurrentPlace.size(); i++) {
+                                Monsters monster = monstersInCurrentPlace.get(i);
+                                if (monster.getHP() > 0) {
+                                    System.out.println((i + 1) + ". " + monster.getName());
+                                }
+                            }
+                            int monsterChoice = chooseNumber(scanner, monstersInCurrentPlace);
+                            if (monsterChoice != -1) {
+                                // Ajoutez ici la logique pour démarrer un combat contre le monstre choisi.
+                                System.out.println("Vous vous battez contre " + monstersInCurrentPlace.get(monsterChoice).getName());
+                            } else {
+                                System.out.println("Aucun ennemi en vie ici.");
+                            }
+                        } else {
+                            System.out.println("Aucun ennemi ici.");
+                        }
                         break;
-                    }
+                    case 3:
+                        // Option "Se reposer"
+                        System.out.println("Vous vous reposez et récupérez vos points de vie.");
+                        // Ajoutez ici la logique pour rétablir les points de vie du joueur.
+                        break;
+                    case 4:
+                        // Option "Quitter le jeu"
+                        quitGame = true;
+                        break;
+                    default:
+                        System.out.println("Choix invalide. Veuillez choisir un numéro valide.");
                 }
-
-                if (destination != null) {
-                    joueur.move(destination);   
-                } else {
-                    System.out.println("DESTINATION INVALIDE. Vous ne pouvez pas vous déplacer là-bas.");
-                }
+            } catch (NumberFormatException e) {
+                System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
             }
         }
-        
+
         scanner.close();
-    }
+    }   
 
     private static void displayPlayerInfo(Player joueur) {
-        System.out.println("\nInformations du joueur :");
-        System.out.println("Nom du joueur : " + joueur.getName());
-        System.out.println("Lieu actuel du joueur : " + joueur.getCurrentPlace().getName());
-        System.out.println("Lieux accessibles depuis " + joueur.getCurrentPlace().getName() + ":");
-        for (Places place : joueur.getCurrentPlace().getAccessiblePlaces()) {
-            System.out.println("- " + place.getName());
-        }
-        System.out.println("Points de vie du joueur : " + joueur.Get_HP());
-        System.out.println("Niveau du joueur: "+ joueur.getLevel());
-        System.out.println("Argent du joueur: "+ joueur.getCoin());
+        // Afficher les informations du joueur
     }
+
+    private static int chooseNumber(Scanner scanner, List<?> options) {
+        System.out.print("Entrez un numéro : ");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("#quit")) {
+            return -1;
+        }
+
+        try {
+            int choice = Integer.parseInt(input);
+            if (choice >= 1 && choice <= options.size()) {
+                return choice - 1;
+            } else {
+                System.out.println("CHOIX INVALIDE. Veuillez choisir un numéro valide.");
+                return chooseNumber(scanner, options);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
+            return chooseNumber(scanner, options);
+        }
+    }
+
+    private static boolean areMonstersAlive(Places place) {
+        List<Monsters> monstersInPlace = place.getMonsters();
+        for (Monsters monster : monstersInPlace) {
+            if (monster.getHP() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
 
 
