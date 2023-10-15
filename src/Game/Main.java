@@ -34,9 +34,10 @@ public class Main {
         volcano.addAccessiblePlace(forest);
 
         Gobelin gobelin1 = new Gobelin("Dmitroff");
-        forest.addGobelin(gobelin1);
+        Bat bat1 = new Bat("batm");
+        forest.addMonster(gobelin1);
+        forest.addMonster(bat1);
 
-        northraod.addMonster(gobelin1);
 
         System.out.print("Entrez le nom du joueur : ");
         String playerName = scanner.nextLine();
@@ -50,66 +51,35 @@ public class Main {
         System.out.println(joueur.getName());
 
         boolean quitGame = false;
+        boolean print=true;
 
         while (!quitGame) {
+            //print de test:
             System.out.println(joueur.getCurrentPlace());
             System.out.println(joueur.getCurrentPlace().hasMonsters());
-            Show.PrintPlace(joueur,0);
+
+
+            if(print){Show.PrintPlace(joueur,0);}else{print=true;}
             String choiceStr = scanner.nextLine();
             Places currentPlace = joueur.getCurrentPlace();
             List<Monsters> monstersInCurrentPlace = currentPlace.getMonsters();
 
             try {
                 int choice = Integer.parseInt(choiceStr);
-        
-                switch (choice) {
-                    case 1:
-                        if (Places.areMonstersAlive(currentPlace)) {
-                            System.out.println("Impossible de se déplacer avec des monstres encore en vie autour.");
-                        } else {
-                            List<Places> accessiblePlaces = currentPlace.getAccessiblePlaces();
-                            System.out.println("Lieux accessibles :");
-                            for (int i = 0; i < accessiblePlaces.size(); i++) {
-                                System.out.println((i + 1) + ". " + accessiblePlaces.get(i).getName());
-                            }
-                            int placeChoice = chooseNumber(scanner, accessiblePlaces);
+                
+                if(choice==1){
+                    if(currentPlace.areMonstersAlive()){
+                        System.out.println("Impossible");
+                        print=false;
+                        continue;
+                    }
+                    Show.PrintPlace(joueur,1);
+                    int placeChoice = chooseNumber(scanner, currentPlace.getAccessiblePlaces());
                             if (placeChoice != -1) {
-                                Places destination = accessiblePlaces.get(placeChoice);
+                                Places destination = currentPlace.getAccessiblePlaces().get(placeChoice);
                                 joueur.move(destination);
                             }
-                        }
-                    case 2:
-                        // Option "Se battre"
-                        if (!monstersInCurrentPlace.isEmpty()) {
-                            System.out.println("Monstres présents :");
-                            for (int i = 0; i < monstersInCurrentPlace.size(); i++) {
-                                Monsters monster = monstersInCurrentPlace.get(i);
-                                if (monster.getHP() > 0) {
-                                    System.out.println((i + 1) + ". " + monster.getName());
-                                }
-                            }
-                            int monsterChoice = chooseNumber(scanner, monstersInCurrentPlace);
-                            if (monsterChoice != -1) {
-                                // Ajoutez ici la logique pour démarrer un combat contre le monstre choisi.
-                                System.out.println("Vous vous battez contre " + monstersInCurrentPlace.get(monsterChoice).getName());
-                            } else {
-                                System.out.println("Aucun ennemi en vie ici.");
-                            }
-                        } else {
-                            System.out.println("Aucun ennemi ici.");
-                        }
-                        break;
-                    case 3:
-                        // Option "Se reposer"
-                        System.out.println("Vous vous reposez et récupérez vos points de vie.");
-                        // Ajoutez ici la logique pour rétablir les points de vie du joueur.
-                        break;
-                    case 4:
-                        // Option "Quitter le jeu"
-                        quitGame = true;
-                        break;
-                    default:
-                        System.out.println("Choix invalide. Veuillez choisir un numéro valide.");
+
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
@@ -139,6 +109,10 @@ public class Main {
             System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
             return chooseNumber(scanner, options);
         }
+    }
+
+    private static void fight(Player p,Monsters m){
+
     }
 
 }

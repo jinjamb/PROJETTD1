@@ -1,6 +1,9 @@
 package Game;
 
+import java.util.List;
+
 import Game.Job.*;
+import Game.Mob.Monsters;
 import Game.Pla.Places;
 
 public class Show{
@@ -18,15 +21,16 @@ public class Show{
 
         String HPAndMax = " "+HP +"/"+ HPMax+" ";
 
-        for(int i=name.length();i<"Nom_Joueur".length();i++){name += " ";}
-        for(int i=HPAndMax.length();i<"Act/Max".length();i++){HP+=" ";}
-        for(int i=Lvl.length();i<"NIVEAU".length();i++){Lvl+=" ";}
+        name=complet(name, "NOM_JOUEUR");
+        HPAndMax = complet(HPAndMax,"ACT/MAX");
+        Lvl=complet(Lvl,"NIVEAU");
 
         bg = bg.replace("NOM_JOUEUR",name);
         bg = bg.replace("Act/Max", HPAndMax);
         bg = bg.replace("NIVEAU", Lvl);
         //if p.hasmagie()
 
+        String ActDescrip="";
         String Act1="";
         String posi1="";
 
@@ -40,22 +44,63 @@ public class Show{
         String posi4="";
 
         if(action==0){
-            Act1="se deplacer    ";
-            Act2="se battre      ";
-            Act3="se reposer    ";
-            Act4="parler avec   ";
-            if(place.hasMonsters()){
+            ActDescrip="";
+            Act1="se deplacer";
+            Act2="se battre";
+            Act3="se reposer";
+            Act4="parler avec";
+            if(place.areMonstersAlive()){
                 posi1="(Impossible)";
-                posi2="(Possible)  ";
+                posi2="(Possible)";
                 posi3="(Impossible)";
                 posi4="(Impossible)";
             }else{
-                posi1="(Possible)  ";
+                posi1="(Possible)";
                 posi2="(Impossible)";
-                posi3="(Possible)  ";
-                posi4="(Possible)  ";
+                posi3="(Possible)";
+                posi4="(Possible)";
             }
         }
+
+        else if(action==1){
+            ActDescrip="Lieux:";
+            List<Places> accessiblePlaces = place.getAccessiblePlaces();
+            Act1=accessiblePlaces.get(0).getName();
+
+            if(accessiblePlaces.size()==2){
+                Act2=accessiblePlaces.get(1).getName();
+            }
+            Act3="";
+            Act4="";
+        }
+        else if(action==2){
+            ActDescrip="Monstres:";
+            Monsters m1=place.getMonsters().get(0);
+            Act1=m1.getName();
+            if(m1.getHP()==0){posi1="Mort";}
+
+            if(place.getMonsters().size()>=2){
+                Monsters m2=place.getMonsters().get(1);
+                Act2=m2.getName();
+                if(m2.getHP()==0){posi2="Mort";}
+            }
+            if(place.getMonsters().size()>=3){
+                Monsters m2=place.getMonsters().get(1);
+                Act2=m2.getName();
+                if(m2.getHP()==0){posi2="Mort";}
+            }
+        }
+        ActDescrip = complet(ActDescrip,"AAAAAAAAAAAAAA");
+        Act1 = complet(Act1, "BBBBBBBBBBBBBBB");
+        Act2 = complet(Act2, "BBBBBBBBBBBBBBB");
+        Act3 = complet(Act3, "DDDDDDDDDDDDDD");
+        Act4 = complet(Act4, "EEEEEEEEEEEEEE");
+        posi1 = complet(posi1, "bbbbbbbbbbbb");
+        posi2 = complet(posi2, "bbbbbbbbbbbb");
+        posi3 = complet(posi3, "bbbbbbbbbbbb");
+        posi4 = complet(posi4, "bbbbbbbbbbbb");
+
+        bg = bg.replace("AAAAAAAAAAAAAA", ActDescrip);
         bg = bg.replace("BBBBBBBBBBBBBBB",Act1);
         bg = bg.replace("bbbbbbbbbbbb",posi1);
 
@@ -83,4 +128,9 @@ public class Show{
         System.out.println(Illu);
     }
 
+
+    public static String complet(String base,String patern){
+        for(int i=base.length();i<patern.length();i++){base+=" ";}
+        return base;
+    }
 }
