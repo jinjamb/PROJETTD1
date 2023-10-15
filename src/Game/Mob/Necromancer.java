@@ -17,7 +17,7 @@ public class Necromancer extends Monsters {
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
                 "| PV:  Act/Max      |                                   &&&&&&&&                                     \r\n" + //
                 "| Mana: Act/Max     |                                &&&&&&&&&&&&&                                   \r\n" + //
-                "| Pieces: XXXX      |                   &    &     &&&&&        &&&&&       &&                       \r\n" + //
+                "|                   |                   &    &     &&&&&        &&&&&       &&                       \r\n" + //
                 "|                   |                   &    &     &&&&  O    O  &&&&       &&&&&&&&&                \r\n" + //
                 "|                   |                       &      &&&&          &&&&       &&       &&&&            \r\n" + //
                 "|                   |                    &&        &&&&&&&    &&&&&&&       &&            &&         \r\n" + //

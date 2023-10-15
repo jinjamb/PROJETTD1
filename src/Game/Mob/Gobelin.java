@@ -13,7 +13,7 @@ public class Gobelin extends Monsters {
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
                 "| PV:  Act/Max      |                                                                                \r\n" + //
                 "| Mana: Act/Max     |                                                                                \r\n" + //
-                "| Pieces: XXXX      |                                &&&&&&&&&&&&&                                   \r\n" + //
+                "|                   |                                &&&&&&&&&&&&&                                   \r\n" + //
                 "|                   |                              &&              &&                                \r\n" + //
                 "|                   |                       &&&&&&&&&              &&                                \r\n" + //
                 "|                   |                     &&     &      O          &&&&&&&&&                         \r\n" + //

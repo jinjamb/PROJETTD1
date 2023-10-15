@@ -16,4 +16,7 @@ public abstract class Monsters extends Characters {
 
     }
 
+    public String getTexture(){
+        return this.texture;
+    }
 }

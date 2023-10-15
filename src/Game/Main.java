@@ -74,11 +74,21 @@ public class Main {
                         continue;
                     }
                     Show.PrintPlace(joueur,1);
-                    int placeChoice = chooseNumber(scanner, currentPlace.getAccessiblePlaces());
-                            if (placeChoice != -1) {
-                                Places destination = currentPlace.getAccessiblePlaces().get(placeChoice);
-                                joueur.move(destination);
-                            }
+                    int placeChoice = choosePlace(scanner, currentPlace.getAccessiblePlaces());
+                    if (placeChoice != -1) {
+                        Places destination = currentPlace.getAccessiblePlaces().get(placeChoice);
+                        joueur.move(destination);
+                    }
+                }
+                else if(choice==2){
+                    if(!currentPlace.areMonstersAlive()){
+                        System.out.println("Tout les monstres sont mort");
+                        print=false;
+                        continue;
+                    }
+                    Show.PrintPlace(joueur,2);
+                    int n=chooseMonster(scanner, currentPlace.getMonsters());
+                    fight(joueur,currentPlace.getMonsters().get(n),scanner);
 
                 }
             } catch (NumberFormatException e) {
@@ -89,7 +99,7 @@ public class Main {
 
 
     }
-    private static int chooseNumber(Scanner scanner, List<?> options) {
+    private static int choosePlace(Scanner scanner, List<?> options) {
         System.out.print("Entrez un numéro : ");
         String input = scanner.nextLine();
 
@@ -103,16 +113,51 @@ public class Main {
                 return choice - 1;
             } else {
                 System.out.println("CHOIX INVALIDE. Veuillez choisir un numéro valide.");
-                return chooseNumber(scanner, options);
+                return choosePlace(scanner, options);
             }
         } catch (NumberFormatException e) {
             System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
-            return chooseNumber(scanner, options);
+            return choosePlace(scanner, options);
         }
     }
 
-    private static void fight(Player p,Monsters m){
+    private static int chooseMonster(Scanner scanner,List<?> options){
+        System.out.print("Choix: ");
+        String input = scanner.nextLine();
 
+        if (input.equalsIgnoreCase("#quit")) {
+            return -1;
+        }
+
+        try {
+            int choice = Integer.parseInt(input);
+            if (choice >= 1 && choice <= options.size()) {
+                return choice-1;
+            } else {
+                System.out.println("CHOIX INVALIDE. Veuillez choisir un numéro valide.");
+                return chooseMonster(scanner, options);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
+            return chooseMonster(scanner, options);
+        }
+    }
+
+    private static int fight(Player p, Monsters m,Scanner scanner){
+        Show.fight(p, m);
+        while(p.getHP()!=0 || m.getHP()!=0){
+            System.out.println("test fight");
+            
+            System.out.print("Choix: ");
+            String input = scanner.nextLine();
+            try{
+                int choise = Integer.parseInt(input);
+
+            }catch(NumberFormatException e){
+                System.out.println("choix invalide");
+            }
+        }
+        return -1;
     }
 
 }

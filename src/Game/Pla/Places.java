@@ -55,6 +55,8 @@ public abstract class Places {
     public boolean areMonstersAlive() {
         List<Monsters> monstersInPlace = this.getMonsters();
         for (Monsters monster : monstersInPlace) {
+            System.out.print("monstre test:");
+            System.out.println(monster.getHP());
             if (monster.getHP() > 0) {
                 return true;
             }

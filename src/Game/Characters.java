@@ -40,4 +40,10 @@ public abstract class Characters {
     public int getHPMax(){
         return this.HP_max;
     }
+    public int getManaMax(){
+        return this.Mana_max;
+    }
+    public int getMana(){
+        return this.Mana_act;
+    }
 }

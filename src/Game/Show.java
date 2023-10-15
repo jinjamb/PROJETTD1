@@ -11,23 +11,12 @@ public class Show{
 
 
     public static void PrintPlace(Player p,int action){
-        String name=p.getName();
-        String HP =  String.valueOf(p.getHP());
-        String HPMax = String.valueOf(p.getHPMax());
-        String Lvl = String.valueOf(p.getLevel());
-
         Places place=p.getCurrentPlace();
         String bg=place.getBackground();
 
-        String HPAndMax = " "+HP +"/"+ HPMax+" ";
+        bg=palyerStats(bg, p);
 
-        name=complet(name, "NOM_JOUEUR");
-        HPAndMax = complet(HPAndMax,"ACT/MAX");
-        Lvl=complet(Lvl,"NIVEAU");
 
-        bg = bg.replace("NOM_JOUEUR",name);
-        bg = bg.replace("Act/Max", HPAndMax);
-        bg = bg.replace("NIVEAU", Lvl);
         //if p.hasmagie()
 
         String ActDescrip="";
@@ -77,17 +66,17 @@ public class Show{
             ActDescrip="Monstres:";
             Monsters m1=place.getMonsters().get(0);
             Act1=m1.getName();
-            if(m1.getHP()==0){posi1="Mort";}
+            if(m1.getHP()==0){posi1="Mort";}else{posi1="Vivant";}
 
             if(place.getMonsters().size()>=2){
                 Monsters m2=place.getMonsters().get(1);
                 Act2=m2.getName();
-                if(m2.getHP()==0){posi2="Mort";}
+                if(m2.getHP()==0){posi2="Mort";}else{posi2="Vivant";}
             }
             if(place.getMonsters().size()>=3){
                 Monsters m2=place.getMonsters().get(1);
-                Act2=m2.getName();
-                if(m2.getHP()==0){posi2="Mort";}
+                Act3=m2.getName();
+                if(m2.getHP()==0){posi3="Mort";}else{posi3="Vivant";}
             }
         }
         ActDescrip = complet(ActDescrip,"AAAAAAAAAAAAAA");
@@ -132,5 +121,49 @@ public class Show{
     public static String complet(String base,String patern){
         for(int i=base.length();i<patern.length();i++){base+=" ";}
         return base;
+    }
+
+    public static String palyerStats(String patern,Player p){
+        String bg=patern;
+        String name=p.getName();
+        String HP =  String.valueOf(p.getHP());
+        String HPMax = String.valueOf(p.getHPMax());
+        String Lvl = String.valueOf(p.getLevel());
+        String Mana="";
+        String HPAndMax = " "+HP +"/"+ HPMax+" ";
+
+        if(p.getManaMax()!=0){
+            Mana="Mana: "+p.getMana()+"/"+p.getManaMax();
+        }
+
+        Mana=complet(Mana,"Mana: Act/Max");
+        name=complet(name, "NOM_JOUEUR");
+        HPAndMax = complet(HPAndMax,"ACT/MAX");
+        Lvl=complet(Lvl,"NIVEAU");
+
+        bg = bg.replace("Mana: Act/Max", Mana);
+        bg = bg.replace("NOM_JOUEUR",name);
+        bg = bg.replace("Act/Max", HPAndMax);
+        bg = bg.replace("NIVEAU", Lvl);
+
+        return bg;
+    }
+
+    public static void fight(Player p,Monsters m){
+        String bg=m.getTexture();
+        bg=palyerStats(bg, p);
+
+        String PV=String.valueOf(m.getHP());
+        String Mana="";
+        if(m.getManaMax()!=0){
+            Mana="ManaMob: "+m.getManaMax();
+        }
+        PV = complet(PV,"PVMOB");
+        Mana=complet(Mana,"ManaMob: MANAM");
+
+        bg = bg.replace("PVMOB", PV);
+        bg = bg.replace("ManaMob: MANAM",Mana);
+
+        System.out.println(bg);
     }
 }
