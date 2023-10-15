@@ -81,7 +81,7 @@ public class Show{
                 if(m2.getHP()<=0){posi2="(Mort)";}else{posi2="(Vivant)";}
             }
             if(place.getMonsters().size()>=3){
-                Monsters m3=place.getMonsters().get(1);
+                Monsters m3=place.getMonsters().get(2);
                 Act3="3."+m3.getName();
                 if(m3.getHP()<=0){posi3="(Mort)";}else{posi3="(Vivant)";}
             }
