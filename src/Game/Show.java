@@ -5,6 +5,7 @@ import java.util.List;
 import Game.Job.*;
 import Game.Mob.Monsters;
 import Game.Pla.Places;
+import Game.Pnj.*;
 
 public class Show{
     
@@ -42,7 +43,7 @@ public class Show{
                 posi1="(Impossible)";
                 posi2="(Possible)";
                 posi3="(Impossible)";
-                posi4="(Impossible)";
+                posi4="(Possible)";
             }else{
                 posi1="(Possible)";
                 posi2="(Impossible)";
@@ -66,17 +67,27 @@ public class Show{
             ActDescrip="Monstres:";
             Monsters m1=place.getMonsters().get(0);
             Act1=m1.getName();
-            if(m1.getHP()<=0){posi1="Mort";}else{posi1="Vivant";}
+            if(m1.getHP()<=0){posi1="(Mort)";}else{posi1="(Vivant)";}
 
             if(place.getMonsters().size()>=2){
                 Monsters m2=place.getMonsters().get(1);
                 Act2=m2.getName();
-                if(m2.getHP()<=0){posi2="Mort";}else{posi2="Vivant";}
+                if(m2.getHP()<=0){posi2="(Mort)";}else{posi2="(Vivant)";}
             }
             if(place.getMonsters().size()>=3){
                 Monsters m3=place.getMonsters().get(1);
                 Act3=m3.getName();
-                if(m3.getHP()<=0){posi3="Mort";}else{posi3="Vivant";}
+                if(m3.getHP()<=0){posi3="(Mort)";}else{posi3="(Vivant)";}
+            }
+        }
+        else if(action==3){
+            ActDescrip="Villageois:";
+            Npc m1=place.getNpc().get(0);
+            Act1=m1.getName();
+            
+            if(place.getNpc().size()>=2){
+                Npc m2=place.getNpc().get(1);
+                Act2=m2.getName();
             }
         }
         ActDescrip = complet(ActDescrip,"AAAAAAAAAAAAAA");
@@ -131,8 +142,6 @@ public class Show{
         String Lvl = String.valueOf(p.getLevel());
         String Mana="";
         String HPAndMax = " "+HP +"/"+ HPMax+" ";
-
-        System.out.println("info test:"+p.getManaMax());
         if(p.getManaMax()!=0){
             Mana="Mana: "+p.getMana()+"/"+p.getManaMax();
         }
@@ -150,10 +159,26 @@ public class Show{
         return bg;
     }
 
+    public static void talk(Player p,Npc npc,boolean monstre){
+        String bg= npc.getTexture();
+        bg = palyerStats(bg, p);
+        String phrase="";
+        if(monstre){
+            phrase="Au secours, des MONSTRES !!!";
+        }else{
+            phrase=npc.getPhrase();
+        }
+        phrase = complet(phrase, "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+        bg = bg.replace("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", phrase);
+
+        System.out.println(bg);
+    }
+
     public static void fight(Player p,Monsters m){
         String bg=m.getTexture();
         bg=palyerStats(bg, p);
 
+        String nom=m.getName();
         String PV=String.valueOf(m.getHP());
         String Mana="";
 
@@ -174,9 +199,11 @@ public class Show{
         att2 = complet(att2,"ATTAQUE2XXXXXXXX");
         att3 = complet(att3,"ATTAQUE3XXXXXXXX");
 
+        nom=complet(nom,"NOMDUMONSTRE");
         PV = complet(PV,"PVMOB");
         Mana=complet(Mana,"ManaMob: MANAM");
 
+        bg = bg.replace("NOMDUMONSTRE", nom);
         bg = bg.replace("PVMOB", PV);
         bg = bg.replace("ManaMob: MANAM",Mana);
         bg = bg.replace("ATTAQUE1XXXXXXXX", att1);

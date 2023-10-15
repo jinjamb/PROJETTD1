@@ -1,20 +1,32 @@
 package Game.Pnj;
 
-public class Npc {
+import Game.Characters;
 
+public class Npc extends Characters{
+    protected String nom;
     protected String phrase;
+    protected String texture;
 
-    public Npc() {
-        this.phrase = "";
+    public Npc(String nom) {
+        super(nom);
+        this.nom=nom;
+
     }
 
     public String monsterString() {
-        this.phrase = "Il y a un monstre dans la zone. Au secours !";
+        this.phrase = "";
         return phrase;
     }
 
     public String passiveString() {
         this.phrase = "Bonjour combattant.";
         return phrase;
+    }
+
+    public String getTexture(){
+        return texture;
+    }
+    public String getPhrase(){
+        return this.phrase;
     }
 }

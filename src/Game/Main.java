@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Game.Job.*;
 import Game.Mob.*;
 import Game.Pla.*;
-//import Game.*;
+import Game.Pnj.*;
 
 
 
@@ -37,18 +37,21 @@ public class Main {
         volcano.addAccessiblePlace(forest);
 
         Gobelin gobelin1 = new Gobelin("Dmitroff");
-        Gobelin gobelin2 = new Gobelin("Gobby");
+        Gobelin gobelin2 = new Gobelin("gollum");
 
-        Orc orc1 = new Orc("Orc");
-        Orc orc2 = new Orc("lorc");
+        Orc orc1 = new Orc("Shrek");
+        Orc orc2 = new Orc("Azog");
 
-        Bat bat1 = new Bat("batun");
-        Bat bat2 = new Bat("batdeu");
-        Bat bat3 = new Bat("battroa");
+        Bat bat1 = new Bat("man");
+        Bat bat2 = new Bat("signal");
+        Bat bat3 = new Bat("mobil");
+        Necromancer nec = new Necromancer("Angmar");
+        Dragon Dragon = new Dragon("Dragonne");
 
-        Necromancer nec = new Necromancer("Necromant");
-
-        Dragon Dragon = new Dragon("Dragon2Shrek");
+        Npc pnj1 = new Giroud();
+        Npc pnj4 = new Roberts();
+        Npc pnj3 = new Bern();
+        Npc pnj2 = new Daho();
 
         southroad.addMonster(orc1);
         southroad.addMonster(orc2);
@@ -59,6 +62,22 @@ public class Main {
         marsh.addMonster(bat2);
         crypt.addMonster(nec);
         volcano.addMonster(Dragon);
+
+        padhiver.addVillager(pnj1);
+        padhiver.addVillager(pnj4);
+        northraod.addVillager(pnj3);
+        southroad.addVillager(pnj2);
+
+
+        int choix = 1;
+
+        switch(choix){
+            case 1:
+                System.out.println("1");
+                break;
+            case 2:
+                System.out.println("2");
+        }
 
 
         System.out.print("Entrez le nom du joueur : ");
@@ -76,9 +95,6 @@ public class Main {
         boolean print=true;
 
         while (!quitGame) {
-            //print de test:
-            System.out.println(joueur.getCurrentPlace());
-            System.out.println(joueur.getCurrentPlace().hasMonsters());
 
 
             if(print){Show.PrintPlace(joueur,0);}else{print=true;}
@@ -103,7 +119,6 @@ public class Main {
                     }
                 }
                 else if(choice==2){
-                    System.out.print("test info sur les monstres en vie:"+!currentPlace.areMonstersAlive());
                     if(!currentPlace.areMonstersAlive()){
                         System.out.println("Tout les monstres sont mort");
                         print=false;
@@ -120,10 +135,23 @@ public class Main {
                     }
                 }
                 else if(choice==3){
+                    if(currentPlace.areMonstersAlive()){
+                        System.out.println("Impossible");
+                    }
                     joueur.rest();
                 }
                 else if(choice==4){
-                    //
+                    Show.PrintPlace(joueur,3);
+                    if(currentPlace.areMonstersAlive()){
+                        int n=chooseNpc(scanner,currentPlace.getNpc());
+                        Show.talk(joueur,currentPlace.getNpc().get(n),true);
+                        scanner.nextLine();
+
+                    }else{
+                        int n=chooseNpc(scanner,currentPlace.getNpc());
+                        Show.talk(joueur,currentPlace.getNpc().get(n),false);
+                        scanner.nextLine();
+                    }
                 }else{
                     System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
                 }
@@ -179,16 +207,38 @@ public class Main {
         }
     }
 
+    private static int chooseNpc(Scanner scanner, List<?> options) {
+        System.out.print("Entrez un numéro : ");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("#quit")) {
+            return -1;
+        }
+
+        try {
+            int choice = Integer.parseInt(input);
+            if (choice >= 1 && choice <= options.size()) {
+                return choice - 1;
+            } else {
+                System.out.println("CHOIX INVALIDE. Veuillez choisir un numéro valide.");
+                return choosePlace(scanner, options);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("CHOIX INVALIDE. Veuillez entrer un numéro valide.");
+            return choosePlace(scanner, options);
+        }
+    }
+
     private static int fight(Player p, Monsters m,Scanner scanner){
         Show.fight(p, m);
         while(p.getHP()>0 && m.getHP()>0){
-            System.out.println("test fight"+m.getHP());
             
             System.out.print("Choix: ");
             String input = scanner.nextLine();
             try{
                 int choice = Integer.parseInt(input);
                 int playerdmg=0;
+                int mobdmg=0;
                 if (choice==1){
                     playerdmg=p.getJob().getDmg(p.getLevel());
                 }else if(choice==2 && p.getManaMax()!=0){
@@ -207,27 +257,25 @@ public class Main {
                 if(m.getHP()>0){
                         if(m.getManaMax()>0){
                             if(m.spell(p)){
-                                Show.fight(p, m);
-                                System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
-                                System.out.println(m.getName()+"vous a infligé "+ m.getMagicDmg()+" dégats");
-                                continue;
+                                mobdmg=m.getMagicDmg();                 
+                            }else{
+                                mobdmg=m.getDmg();
                             }
                         }
                     m.hit(p,m.getDmg());
                 }
                 
                 Show.fight(p, m);
-                System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
-                System.out.println(m.getName()+"vous a infligé "+ m.getDmg()+" dégats");
-
-
-
+                System.out.println(m.getName()+" a pris "+ playerdmg +" dégats");
+                System.out.println(m.getName()+"vous a infligé "+ mobdmg+" dégats");
 
 
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
             }
         }
+        System.out.print("suite (entrez une touche)");
+        scanner.nextLine();
         if(p.getHP()<=0){
             return -1;
         }else{
