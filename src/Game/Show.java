@@ -147,7 +147,7 @@ public class Show{
         String HPMax = String.valueOf(p.getHPMax());
         String Lvl = String.valueOf(p.getLevel());
         String Mana="";
-        String HPAndMax = " "+HP +"/"+ HPMax+" ";
+        String HPAndMax = HP +"/"+ HPMax;
         if(p.getManaMax()!=0){
             Mana="Mana: "+p.getMana()+"/"+p.getManaMax();
         }

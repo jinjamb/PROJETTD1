@@ -272,7 +272,7 @@ public class Main {
                 int mobdmg=0;
                 if (choice==1){
                     playerdmg=p.getJob().getDmg(p.getLevel());
-                    playerAttac="coup de"+p.getJob().getItem().getName();
+                    playerAttac="coup de "+p.getJob().getItem().getName();
                 }else if(choice==2 && p.getManaMax()!=0){
                     if(p.getMana()<2){System.out.println("Mana insufisant");continue;}
                     if(p.level<6){playerdmg=4;}else{playerdmg=8;}
@@ -291,7 +291,11 @@ public class Main {
                 if(m.getHP()>0){
                         if(m.getManaMax()>0){
                             if(m.spell(p)){
+
                                 mobdmg=m.getMagicDmg();
+                                if(p.getJob().getName().equals("Guerrier")){
+                                    mobdmg-=2;
+                                }
                                 MobAttac=m.getSpellName();                 
                             }else{
                                 mobdmg=m.getDmg();
