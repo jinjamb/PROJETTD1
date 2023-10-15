@@ -1,6 +1,8 @@
 package Game.Job;
 
 import Game.Ite.*;
+import Game.Mob.Monsters;
+import Game.*;
 
 public class Magician extends Job {
     public Magician() {
@@ -43,6 +45,13 @@ public class Magician extends Job {
                 "|                   |   |         1.Choisir                             2.Retour                  |  \r\n" + //
                 "=-=-=-=-=-=-=-=-=-=-=   =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  \r\n" + //
                 "";
+    }
+
+    public boolean rayon(Characters p,Monsters m){
+        if (this.mana>0){
+            this.mana-=2;
+        }
+        return true;
     }
 
 }

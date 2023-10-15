@@ -64,6 +64,7 @@ public class Player extends Characters {
     }
     public void heal(){
         this.HP_act=this.HP_max;
+        this.Mana_act=this.Mana_max;
     }
 
     public void setHP(int newHP) {
@@ -77,6 +78,9 @@ public class Player extends Characters {
     }
     public void hit(Monsters m,int n){
         m.takeDmg(n);
+    }
+    public void downmana(int n){
+        this.Mana_act-=n;
     }
 }
 

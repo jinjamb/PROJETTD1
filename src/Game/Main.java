@@ -103,6 +103,7 @@ public class Main {
                     }
                 }
                 else if(choice==2){
+                    System.out.print("test info sur les monstres en vie:"+!currentPlace.areMonstersAlive());
                     if(!currentPlace.areMonstersAlive()){
                         System.out.println("Tout les monstres sont mort");
                         print=false;
@@ -187,10 +188,23 @@ public class Main {
             String input = scanner.nextLine();
             try{
                 int choise = Integer.parseInt(input);
+                int playerdmg=0;
                 if (choise==1){
-                    p.hit(m,p.getJob().getDmg(p.getLevel()));
-                    
-                    if(m.getHP()>0){
+                    playerdmg=p.getJob().getDmg(p.getLevel());
+                }else if(choise==2 && p.getManaMax()!=0){
+                    if(p.getMana()<2){System.out.println("Mana insufisant");continue;}
+                    playerdmg=4;
+                    p.downmana(2);
+                }else if(choise==2 && p.getManaMax()!=0){
+                    if(p.getMana()<9){System.out.println("Mana insufisant");continue;}
+                    playerdmg=15;
+                    p.downmana(9);
+                }else{
+                    System.out.println("choix invalide");
+                    continue;
+                }
+                p.hit(m,playerdmg);
+                if(m.getHP()>0){
                         if(m.getManaMax()>0){
                             if(m.spell(p)){
                                 Show.fight(p, m);
@@ -199,14 +213,17 @@ public class Main {
                                 continue;
                             }
                         }
-                        m.hit(p,m.getDmg());
-                    }
-                    
-                    Show.fight(p, m);
-                    System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
-                    System.out.println(m.getName()+"vous a infligé "+ m.getDmg()+" dégats");
-
+                    m.hit(p,m.getDmg());
                 }
+                
+                Show.fight(p, m);
+                System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+" dégats");
+                System.out.println(m.getName()+"vous a infligé "+ m.getDmg()+" dégats");
+
+
+
+
+
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
             }
