@@ -94,7 +94,7 @@ public class Main {
         boolean quitGame = false;
         boolean print=true;
 
-        while (!quitGame) {
+        while (joueur.getHP()>0 && joueur.getLevel()<10) {
 
 
             if(print){Show.PrintPlace(joueur,0);}else{print=true;}
@@ -128,7 +128,6 @@ public class Main {
                     int n=chooseMonster(scanner, currentPlace.getMonsters());
                     int res= fight(joueur,currentPlace.getMonsters().get(n),scanner);
                     if(res==-1){
-                        System.out.println("YOU DIE!!!");
                         break;
                     }else{
                         joueur.lvlup();
@@ -137,6 +136,7 @@ public class Main {
                 else if(choice==3){
                     if(currentPlace.areMonstersAlive()){
                         System.out.println("Impossible");
+                        print=false;
                     }
                     joueur.rest();
                 }
@@ -154,12 +154,15 @@ public class Main {
                     }
                 }else{
                     System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
+                    print=false;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
+                print=false;
             }
 
         }
+        Show.fin(joueur,true ,scanner);
 
 
     }
