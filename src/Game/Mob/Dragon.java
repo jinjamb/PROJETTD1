@@ -12,10 +12,12 @@ public class Dragon extends Monsters {
         this.Mana_max = 24;
         this.Mana_act = Mana_max;
         this.damage = 12;
+        this.attakName="coup de griffe";
 
         this.heal=0;
         this.magicDmg=20;
         this.spellPrice=8;
+        this.spellname="souffle du dragon";
 
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                             &&&       &&&&     \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                            &&&&     &&&&    && \r\n" + //

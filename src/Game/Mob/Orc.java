@@ -8,6 +8,7 @@ public class Orc extends Monsters {
         this.HP_max = 8;
         this.HP_act = HP_max;
         this.damage = 5;
+        this.attakName="Bisous baveux";
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //

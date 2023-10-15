@@ -8,6 +8,7 @@ public class Gobelin extends Monsters {
         this.HP_max = 4;
         this.HP_act = HP_max;
         this.damage = 4;
+        this.attakName="frappe de bave";
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //

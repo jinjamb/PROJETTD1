@@ -8,6 +8,7 @@ public class Bat extends Monsters {
         this.HP_max = 6;
         this.HP_act = HP_max;
         this.damage = 5;
+        this.attakName="morsure";
         this.texture=
                 "=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
