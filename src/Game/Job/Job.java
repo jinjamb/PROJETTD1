@@ -85,7 +85,6 @@ public class Job{
                 Show.PrintChoice(name,selectedJob);
                 while(!confirm){
                     
-                    System.out.print("Choix:");
                     try{
                         choiceStr = scanner.nextLine();
                         int confirmChoice1 = Integer.parseInt(choiceStr);

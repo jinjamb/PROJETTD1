@@ -13,6 +13,7 @@ import Game.Pnj.*;
 public class Main {
     public static void main(String[] args) {
 
+
         Scanner scanner = new Scanner(System.in);
 
         Places padhiver = new Padhiver();
@@ -68,7 +69,7 @@ public class Main {
         northraod.addVillager(pnj3);
         southroad.addVillager(pnj2);
 
-
+        System.out.println(padhiver.areMonstersAlive());
         int choix = 1;
 
         switch(choix){
@@ -96,8 +97,6 @@ public class Main {
         
 
         Player joueur = new Player(playerName, playerJob, padhiver);
-        
-        System.out.println(joueur.getName());
 
         boolean print=true;
 
@@ -126,9 +125,17 @@ public class Main {
                 }
                 else if(choice==2){
                     if(!currentPlace.areMonstersAlive()){
-                        System.out.println("Tout les monstres sont mort");
-                        print=false;
-                        continue;
+                        if(!currentPlace.hasMonsters()){
+                            System.out.println("Aucun ennemi ici");
+                            print=false;
+                            continue;
+                        }
+                        else{
+                            System.out.println("Tout les monstres sont mort");
+                            print=false;
+                            continue;
+                        }
+
                     }
                     Show.PrintPlace(joueur,2);
                     int n=chooseMonster(scanner, currentPlace.getMonsters());
@@ -153,11 +160,13 @@ public class Main {
                         if(currentPlace.areMonstersAlive()){
                             int n=chooseNpc(scanner,currentPlace.getNpc());
                             Show.talk(joueur,currentPlace.getNpc().get(n),true);
+                            System.out.println("Tapez une touche");
                             scanner.nextLine();
 
                         }else{
                             int n=chooseNpc(scanner,currentPlace.getNpc());
                             Show.talk(joueur,currentPlace.getNpc().get(n),false);
+                            System.out.println("Tapez une touche");
                             scanner.nextLine();
                         }
                     }else{
@@ -174,7 +183,11 @@ public class Main {
             }
 
         }
-        Show.fin(joueur,true ,scanner);
+        if(joueur.getHP()<=0){
+            Show.fin(joueur,false ,scanner);
+        }else{
+            Show.fin(joueur,true ,scanner);
+        }
 
 
     }
@@ -252,17 +265,23 @@ public class Main {
             String input = scanner.nextLine();
             try{
                 int choice = Integer.parseInt(input);
+
+                String playerAttac="";
+                String MobAttac="";
                 int playerdmg=0;
                 int mobdmg=0;
                 if (choice==1){
                     playerdmg=p.getJob().getDmg(p.getLevel());
+                    playerAttac="coup de"+p.getJob().getItem().getName();
                 }else if(choice==2 && p.getManaMax()!=0){
                     if(p.getMana()<2){System.out.println("Mana insufisant");continue;}
-                    playerdmg=4;
+                    if(p.level<6){playerdmg=4;}else{playerdmg=8;}
+                    playerAttac="Rayon de givre";
                     p.downmana(2);
                 }else if(choice==3 && p.getManaMax()!=0){
                     if(p.getMana()<9){System.out.println("Mana insufisant");continue;}
-                    playerdmg=15;
+                    if(p.level<6){playerdmg=15;}else{playerdmg=15;}
+                    playerAttac="Boule de feu";
                     p.downmana(9);
                 }else{
                     System.out.println("choix invalide");
@@ -272,17 +291,19 @@ public class Main {
                 if(m.getHP()>0){
                         if(m.getManaMax()>0){
                             if(m.spell(p)){
-                                mobdmg=m.getMagicDmg();                 
+                                mobdmg=m.getMagicDmg();
+                                MobAttac=m.getSpellName();                 
                             }else{
                                 mobdmg=m.getDmg();
+                                MobAttac=m.getAttakName();
                             }
                         }
                     m.hit(p,m.getDmg());
                 }
                 
                 Show.fight(p, m);
-                System.out.println(m.getName()+" a pris "+ playerdmg +" dégats");
-                System.out.println(m.getName()+"vous a infligé "+ mobdmg+" dégats");
+                System.out.println(p.getName()+" utilise "+playerAttac+": "+m.getName()+" a pris "+ playerdmg +" dégats");
+                System.out.println(m.getName()+" utilise "+MobAttac+" cela vous inflige "+ mobdmg+" dégats");
 
 
             }catch(NumberFormatException e){

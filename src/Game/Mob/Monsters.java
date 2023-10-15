@@ -5,9 +5,11 @@ import java.util.Random;
 
 public abstract class Monsters extends Characters {
     String texture="";
+    String attakName;
     int magicDmg=0;
     int heal=0;
     int spellPrice=0;
+    String spellname="";
 
     public Monsters(String name) {
 
@@ -37,6 +39,10 @@ public abstract class Monsters extends Characters {
             if (n==1){
                 this.hit(p,this.magicDmg);
                 this.Mana_act-=this.spellPrice;
+
+
+                this.HP_act+=this.heal;
+                if(this.HP_act>this.HP_max){this.HP_act=this.HP_max;}
                 return true;
             }else{
                 this.hit(p,this.getDmg());
@@ -46,5 +52,11 @@ public abstract class Monsters extends Characters {
     }
     public int getMagicDmg(){
         return this.magicDmg;
+    }
+    public String getSpellName(){
+        return this.spellname;
+    }
+    public String getAttakName(){
+        return this.attakName;
     }
 }

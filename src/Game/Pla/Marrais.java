@@ -3,7 +3,8 @@ package Game.Pla;
 public class Marrais extends Places{
     public Marrais(){
         super("Marrais");
-        this.background="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
+        this.background=
+        "=-=-=-=-=-=-=-=-=-=-=                                   Marrais                                      \r\n" + //
         "| NOM: NOM_JOUEUR   |                         &&                                                     \r\n" + //
         "| LVL: NIVEAU       |                         &&                 &                                   \r\n" + //
         "| PV:  Act/Max      |            &            &&     &&          &                      &            \r\n" + //
@@ -40,4 +41,5 @@ public class Marrais extends Places{
         "";
     }
 }
+
 

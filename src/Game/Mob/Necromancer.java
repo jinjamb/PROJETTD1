@@ -12,10 +12,12 @@ public class Necromancer extends Monsters {
         this.Mana_max = 10;
         this.Mana_act = Mana_max;
         this.damage = 8;
+        this.attakName="coup de faux";
 
         this.heal=6;
         this.magicDmg=12;
         this.spellPrice=5;
+        this.spellname="Transfert de vie";
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
