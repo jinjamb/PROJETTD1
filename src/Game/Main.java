@@ -310,6 +310,9 @@ public class Main {
                 System.out.println("choix invalide");
             }
         }
+        if(m.getHP()<=0){
+            System.out.println(m.getName()+" est vaincu!");
+        }
         System.out.print("suite (entrez une touche)");
         scanner.nextLine();
         if(p.getHP()<=0){
