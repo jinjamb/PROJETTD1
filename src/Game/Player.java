@@ -30,8 +30,6 @@ public class Player extends Characters {
                 currentPlace = newPlace;
                 System.out.println("Vous êtes maintenant à " + newPlace.getName());
             }
-        } else {
-            //System.out.println("Vous ne pouvez pas vous déplacer vers " + newPlace.getName() + " depuis " + currentPlace.getName());
         }
     }
 

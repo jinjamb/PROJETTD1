@@ -297,9 +297,11 @@ public class Main {
                                 mobdmg=m.getDmg();
                                 MobAttac=m.getAttakName();
                             }
+                        }else{
+                            mobdmg=m.getDmg();
+                            MobAttac=m.getAttakName();
                         }
-                        //else dmg mobs
-                    m.hit(p,m.getDmg());
+                    m.hit(p,mobdmg);
                 }
                 
                 Show.fight(p, m);
@@ -310,6 +312,9 @@ public class Main {
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
             }
+        }
+        if(m.getHP()<=0){
+            System.out.println(m.getName()+" est vaincu!");
         }
         System.out.print("suite (entrez une touche)");
         scanner.nextLine();
