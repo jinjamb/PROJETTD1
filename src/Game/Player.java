@@ -1,6 +1,7 @@
 package Game;
 
 import Game.Job.Job;
+import Game.Mob.Monsters;
 import Game.Pla.Places;
 
 public class Player extends Characters {
@@ -11,6 +12,10 @@ public class Player extends Characters {
 
     public Player(String name, Job job, Places startingPlace) {
         super(name);
+        this.HP_max=job.getHp();
+        this.HP_act=job.getHp();
+        this.Mana_max=job.getMana();
+        this.Mana_act=job.getMana();
         this.job = job;
         this.level = 1;
         this.coins = 0;
@@ -46,8 +51,8 @@ public class Player extends Characters {
         return currentPlace;
     }
 
-    public String getJob() {
-        return job.getName(); 
+    public Job getJob() {
+        return this.job; 
     }
 
     public int getCoin(){
@@ -60,6 +65,14 @@ public class Player extends Characters {
 
     public void setHP(int newHP) {
         this.HP_act = newHP;
+    }
+
+    public void lvlup(){
+        this.HP_max+=this.job.getHp();
+        this.Mana_max+=this.job.getMana();
+    }
+    public void hit(Monsters m,int n){
+        m.takeDmg(n);
     }
 }
 

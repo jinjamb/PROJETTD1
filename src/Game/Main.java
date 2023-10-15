@@ -5,6 +5,7 @@ import java.util.Scanner;
 import Game.Job.*;
 import Game.Mob.*;
 import Game.Pla.*;
+import Game.*;
 
 
 public class Main {
@@ -36,7 +37,8 @@ public class Main {
         Gobelin gobelin1 = new Gobelin("Dmitroff");
         Bat bat1 = new Bat("batm");
         forest.addMonster(gobelin1);
-        forest.addMonster(bat1);
+        
+        northraod.addMonster(bat1);
 
 
         System.out.print("Entrez le nom du joueur : ");
@@ -145,14 +147,18 @@ public class Main {
 
     private static int fight(Player p, Monsters m,Scanner scanner){
         Show.fight(p, m);
-        while(p.getHP()!=0 || m.getHP()!=0){
-            System.out.println("test fight");
+        while(p.getHP()>0 && m.getHP()>0){
+            System.out.println("test fight"+m.getHP());
             
             System.out.print("Choix: ");
             String input = scanner.nextLine();
             try{
                 int choise = Integer.parseInt(input);
-
+                if (choise==1){
+                    p.hit(m,p.getJob().getDmg(p.getLevel()));
+                    System.out.println(m.getName()+"a pris "+ p.getJob().getDmg(p.getLevel())+"Dégats");
+                    Show.fight(p, m);
+                }
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");
             }

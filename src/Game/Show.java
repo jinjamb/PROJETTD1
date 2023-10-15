@@ -132,6 +132,7 @@ public class Show{
         String Mana="";
         String HPAndMax = " "+HP +"/"+ HPMax+" ";
 
+        System.out.println("info test:"+p.getManaMax());
         if(p.getManaMax()!=0){
             Mana="Mana: "+p.getMana()+"/"+p.getManaMax();
         }
@@ -155,14 +156,32 @@ public class Show{
 
         String PV=String.valueOf(m.getHP());
         String Mana="";
-        if(m.getManaMax()!=0){
-            Mana="ManaMob: "+m.getManaMax();
+
+        String att1="coup de "+ p.getJob().getNomItem();
+        String att2="";
+        String att3="";
+
+        if(p.getManaMax()!=0){
+            att2="Rayon de givre";
+            att3="Boule de feu";
         }
+
+        if(m.getManaMax()!=0){
+            Mana="ManaMob: "+m.getMana();
+        }
+        
+        att1 = complet(att1,"ATTAQUE1XXXXXXXX");
+        att2 = complet(att2,"ATTAQUE2XXXXXXXX");
+        att3 = complet(att3,"ATTAQUE3XXXXXXXX");
+
         PV = complet(PV,"PVMOB");
         Mana=complet(Mana,"ManaMob: MANAM");
 
         bg = bg.replace("PVMOB", PV);
         bg = bg.replace("ManaMob: MANAM",Mana);
+        bg = bg.replace("ATTAQUE1XXXXXXXX", att1);
+        bg = bg.replace("ATTAQUE2XXXXXXXX", att2);
+        bg = bg.replace("ATTAQUE3XXXXXXXX", att3);
 
         System.out.println(bg);
     }

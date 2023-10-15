@@ -6,6 +6,12 @@ public abstract class Items {
 
     public Items(String name){
         this.name=name;
-        
+    }
+
+    public int getDmg() {
+        return this.dmg;
+    }
+    public String getName(){
+        return this.name;
     }
 }

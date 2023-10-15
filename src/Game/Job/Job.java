@@ -9,6 +9,7 @@ import Game.Ite.*;
 public class Job{
     private String name;
     protected int hp;
+    protected int mana;
     protected Items item;
     protected String Illustration;
     protected String Pres;
@@ -121,6 +122,31 @@ public class Job{
     
     public String getIllu(){
         return this.Illustration;
+    }
+    public Items getItem(){
+        return this.item;
+    }
+
+    public int getDmg(int lvl){
+        if(lvl<=3){
+            return this.getItem().getDmg();
+        }else if(lvl<=6){
+            return 2*this.getItem().getDmg();
+        }else if(lvl<=9){
+            return 3*this.getItem().getDmg();
+        }else{
+            return 4*this.getItem().getDmg();
+        }
+    }
+
+    public int getHp(){
+        return this.hp;
+    }
+    public int getMana(){
+        return this.mana;
+    }
+    public String getNomItem(){
+        return this.item.getName();
     }
 }
 

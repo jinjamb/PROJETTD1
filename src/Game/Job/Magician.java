@@ -1,8 +1,13 @@
 package Game.Job;
 
+import Game.Ite.*;
+
 public class Magician extends Job {
     public Magician() {
         super("Mage");
+        this.hp=7;
+        this.mana=4;
+        this.item= new Stick();
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                         &   &                                                  \r\n" + //
                 "| NOM: NOM_JOUEUR   |                     &  &&  &                                                   \r\n" + //
                 "| LVL: 1            |                      & &  &  &                                                 \r\n" + //

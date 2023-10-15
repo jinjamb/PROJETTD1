@@ -1,8 +1,13 @@
 package Game.Job;
 
+import Game.Ite.*;
+
 public class Barbarian extends Job{
     public Barbarian(){
         super("Barbare");
+        this.hp=9;
+        this.mana=0;
+        this.item=new Axe();
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: 1            |                                                                   &            \r\n" + //

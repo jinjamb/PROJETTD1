@@ -30,7 +30,6 @@ public abstract class Characters {
         name.takeDmg(n);
     }
 
-
     public void talk(String msg){
         System.out.println(this.name+" dit: "+msg);
     }
