@@ -187,15 +187,15 @@ public class Main {
             System.out.print("Choix: ");
             String input = scanner.nextLine();
             try{
-                int choise = Integer.parseInt(input);
+                int choice = Integer.parseInt(input);
                 int playerdmg=0;
-                if (choise==1){
+                if (choice==1){
                     playerdmg=p.getJob().getDmg(p.getLevel());
-                }else if(choise==2 && p.getManaMax()!=0){
+                }else if(choice==2 && p.getManaMax()!=0){
                     if(p.getMana()<2){System.out.println("Mana insufisant");continue;}
                     playerdmg=4;
                     p.downmana(2);
-                }else if(choise==2 && p.getManaMax()!=0){
+                }else if(choice==3 && p.getManaMax()!=0){
                     if(p.getMana()<9){System.out.println("Mana insufisant");continue;}
                     playerdmg=15;
                     p.downmana(9);

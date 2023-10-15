@@ -128,11 +128,11 @@ public class Job{
     }
 
     public int getDmg(int lvl){
-        if(lvl<=3){
+        if(lvl<3){
             return this.getItem().getDmg();
-        }else if(lvl<=6){
+        }else if(lvl<6){
             return 2*this.getItem().getDmg();
-        }else if(lvl<=9){
+        }else if(lvl<9){
             return 3*this.getItem().getDmg();
         }else{
             return 4*this.getItem().getDmg();
