@@ -139,6 +139,7 @@ public class Main {
                         print=false;
                     }
                     joueur.rest();
+                    print=false;
                 }
                 else if(choice==4){
                     Show.PrintPlace(joueur,3);
