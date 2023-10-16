@@ -124,16 +124,24 @@ public class Main {
                             print=false;
                             continue;
                         }
-
-                    }
-                    Show.PrintPlace(joueur,2);
-                    int n=chooseMonster(scanner, currentPlace.getMonsters());
-                    int res= fight(joueur,currentPlace.getMonsters().get(n),scanner);
-                    if(res==-1){
-                        break;
                     }else{
-                        joueur.lvlup();
+                        Show.PrintPlace(joueur,2);
+                        int n=chooseMonster(scanner, currentPlace.getMonsters());
+
+                        if(currentPlace.getMonsters().get(n).getHP()<=0){
+                            System.out.println("Ce monstre est déja mort.");
+                            System.out.println("suite (entrez une touche)");
+                            scanner.nextLine();
+                            continue;
+                        }
+                        int res= fight(joueur,currentPlace.getMonsters().get(n),scanner);
+                        if(res==-1){
+                            break;
+                        }else{
+                            joueur.lvlup();
+                        }
                     }
+                    
                 }
                 else if(choice==3){
                     if(currentPlace.areMonstersAlive()){
