@@ -13,6 +13,7 @@ public class Job{
     protected Items item;
     protected String Illustration;
     protected String Pres;
+    protected String attakname;
 
     public Job(String name) {
         this.name = name;
@@ -57,6 +58,9 @@ public class Job{
     public String getName() {
         return name;
     }
+    public String getAttakName(){
+        return this.attakname;
+    }
 
 
     public static Job chooseJob(String name,Scanner scanner) {
@@ -85,6 +89,7 @@ public class Job{
                 Show.PrintChoice(name,selectedJob);
                 while(!confirm){
                     
+                    System.out.print("Choix:");
                     try{
                         choiceStr = scanner.nextLine();
                         int confirmChoice1 = Integer.parseInt(choiceStr);

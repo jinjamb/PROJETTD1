@@ -4,7 +4,7 @@ public class Daho extends Npc{
 
     public Daho(){
         super("Daho");
-        this.phrase="vous savez que j'ai fait un jeu en python";
+        this.phrase="vous savez que j'ai fait un jeu d'échec en python";
         this.texture="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //

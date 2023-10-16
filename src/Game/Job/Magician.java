@@ -10,6 +10,7 @@ public class Magician extends Job {
         this.hp=7;
         this.mana=4;
         this.item= new Stick();
+        this.attakname="Coup de baton";
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                         &   &                                                  \r\n" + //
                 "| NOM: NOM_JOUEUR   |                     &  &&  &                                                   \r\n" + //
                 "| LVL: 1            |                      & &  &  &                                                 \r\n" + //
