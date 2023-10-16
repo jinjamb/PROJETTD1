@@ -9,6 +9,7 @@ public class Warrior extends Job{
         this.hp=8;
         this.mana=0;
         this.item = new Sword();
+        this.attakname="Coup d'épée";
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: 1            |                            &&&&&&&&&&&&&                                       \r\n" + //

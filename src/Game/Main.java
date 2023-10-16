@@ -268,11 +268,13 @@ public class Main {
 
                 String playerAttac="";
                 String MobAttac="";
+                String infosup1="";
+                String infosup2="";                
                 int playerdmg=0;
                 int mobdmg=0;
                 if (choice==1){
                     playerdmg=p.getJob().getDmg(p.getLevel());
-                    playerAttac="coup de "+p.getJob().getItem().getName();
+                    playerAttac=p.getJob().getAttakName();
                 }else if(choice==2 && p.getManaMax()!=0){
                     if(p.getMana()<2){System.out.println("Mana insufisant");continue;}
                     if(p.level<6){playerdmg=4;}else{playerdmg=8;}
@@ -289,29 +291,33 @@ public class Main {
                 }
                 p.hit(m,playerdmg);
                 if(m.getHP()>0){
-                        if(m.getManaMax()>0){
-                            if(m.spell(p)){
-
-                                mobdmg=m.getMagicDmg();
-                                if(p.getJob().getName().equals("Guerrier")){
-                                    mobdmg-=2;
-                                }
-                                MobAttac=m.getSpellName();                 
-                            }else{
-                                mobdmg=m.getDmg();
-                                MobAttac=m.getAttakName();
+                    if(m.getManaMax()>0){
+                        if(m.spell(p)){
+                            mobdmg=m.getMagicDmg();
+                            
+                            if(p.getJob().getName().equals("Guerrier")){
+                                mobdmg-=2;
+                                infosup1="L'armure du Guerrier reduit de 2 les dégats.";
                             }
+                            if(m.getName()=="Angmar"){
+                                infosup2=", et il récupère 6 HP";
+                            }
+                            MobAttac=m.getSpellName();
                         }else{
                             mobdmg=m.getDmg();
                             MobAttac=m.getAttakName();
                         }
+                    }else{
+                        mobdmg=m.getDmg();
+                        MobAttac=m.getAttakName();
+                    }
                     m.hit(p,mobdmg);
                 }
                 
                 Show.fight(p, m);
-                System.out.println(p.getName()+" utilise "+playerAttac+": "+m.getName()+" a pris "+ playerdmg +" dégats");
+                System.out.println(p.getName()+" utilise "+playerAttac+": "+m.getName()+" a pris "+ playerdmg +" dégats.");
                 
-                if(m.getHP()>0){System.out.println(m.getName()+" utilise "+MobAttac+" cela vous inflige "+ mobdmg+" dégats");}
+                if(m.getHP()>0){System.out.println(m.getName()+" utilise "+MobAttac+" cela vous inflige "+ mobdmg+" dégats"+infosup2+"."+infosup1);}
 
             }catch(NumberFormatException e){
                 System.out.println("choix invalide");

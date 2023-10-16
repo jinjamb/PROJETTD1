@@ -188,7 +188,7 @@ public class Show{
         String PV=String.valueOf(m.getHP())+"/"+m.getHPMax();
         String Mana="";
 
-        String att1="coup de "+ p.getJob().getNomItem();
+        String att1=p.getJob().getAttakName();
         String att2="";
         String att3="";
 
