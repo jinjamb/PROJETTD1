@@ -31,13 +31,11 @@ public abstract class Monsters extends Characters {
     }
     public boolean spell(Characters p){
         if(this.Mana_act<this.spellPrice){
-            hit(p,this.getDmg());
             return false;
         }else{
             Random r = new Random();
             int n = r.nextInt(2);
             if (n==1){
-                this.hit(p,this.magicDmg);
                 this.Mana_act-=this.spellPrice;
 
 
@@ -45,7 +43,6 @@ public abstract class Monsters extends Characters {
                 if(this.HP_act>this.HP_max){this.HP_act=this.HP_max;}
                 return true;
             }else{
-                this.hit(p,this.getDmg());
                 return false;
             }
         }

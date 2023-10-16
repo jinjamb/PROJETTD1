@@ -13,6 +13,7 @@ public class Job{
     protected Items item;
     protected String Illustration;
     protected String Pres;
+    protected String attakname;
 
     public Job(String name) {
         this.name = name;
@@ -56,6 +57,9 @@ public class Job{
 
     public String getName() {
         return name;
+    }
+    public String getAttakName(){
+        return this.attakname;
     }
 
 

@@ -185,10 +185,10 @@ public class Show{
         bg=palyerStats(bg, p);
 
         String nom=m.getName();
-        String PV=String.valueOf(m.getHP());
+        String PV=String.valueOf(m.getHP())+"/"+m.getHPMax();
         String Mana="";
 
-        String att1="coup de "+ p.getJob().getNomItem();
+        String att1=p.getJob().getAttakName();
         String att2="";
         String att3="";
 
@@ -198,7 +198,7 @@ public class Show{
         }
 
         if(m.getManaMax()!=0){
-            Mana="ManaMob: "+m.getMana();
+            Mana="ManaMob: "+m.getMana()+"/"+m.getManaMax();
         }
         
         att1 = complet(att1,"ATTAQUE1XXXXXXXX");
@@ -206,12 +206,12 @@ public class Show{
         att3 = complet(att3,"ATTAQUE3XXXXXXXX");
 
         nom=complet(nom,"NOMDUMONSTRE");
-        PV = complet(PV,"PVMOB");
-        Mana=complet(Mana,"ManaMob: MANAM");
+        PV = complet(PV,"PVMOBBB");
+        Mana=complet(Mana,"ManaMob: MANAMMM");
 
         bg = bg.replace("NOMDUMONSTRE", nom);
-        bg = bg.replace("PVMOB", PV);
-        bg = bg.replace("ManaMob: MANAM",Mana);
+        bg = bg.replace("PVMOBBB", PV);
+        bg = bg.replace("ManaMob: MANAMMM",Mana);
         bg = bg.replace("ATTAQUE1XXXXXXXX", att1);
         bg = bg.replace("ATTAQUE2XXXXXXXX", att2);
         bg = bg.replace("ATTAQUE3XXXXXXXX", att3);
@@ -221,7 +221,8 @@ public class Show{
 
     public static void fin(Player p,boolean vic,Scanner scan){
         String bg;
-        String defaite="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
+        String defaite=
+                "=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: NIVEAU       |                                                                                \r\n" + //
                 "| PV:  Act/Max      |                                                                                \r\n" + //

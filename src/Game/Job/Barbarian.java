@@ -8,6 +8,7 @@ public class Barbarian extends Job{
         this.hp=9;
         this.mana=0;
         this.item=new Axe();
+        this.attakname="Coup de Ache";
         this.Illustration="=-=-=-=-=-=-=-=-=-=-=                                                                                \r\n" + //
                 "| NOM: NOM_JOUEUR   |                                                                                \r\n" + //
                 "| LVL: 1            |                                                                   &            \r\n" + //
