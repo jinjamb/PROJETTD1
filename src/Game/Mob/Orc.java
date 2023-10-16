@@ -37,8 +37,8 @@ public class Orc extends Monsters {
                 "|                   |                                                                                \r\n" + //
                 "|                   | ============================================================================== \r\n" + //
                 "| Attaque Possible: | |                                NOMDUMONSTRE                                | \r\n" + //
-                "|                   | | PV:      PVMOB                                                             | \r\n" + //
-                "| 1.ATTAQUE1XXXXXXXX| | ManaMob: MANAM                                                             | \r\n" + //
+                "|                   | | PV:      PVMOBBB                                                           | \r\n" + //
+                "| 1.ATTAQUE1XXXXXXXX| | ManaMob: MANAMMM                                                           | \r\n" + //
                 "| 2.ATTAQUE2XXXXXXXX| |                                                                            | \r\n" + //
                 "| 3.ATTAQUE3XXXXXXXX| |                                                                            | \r\n" + //
                 "|                   | |                                                                            | \r\n" + //
