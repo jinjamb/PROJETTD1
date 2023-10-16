@@ -69,17 +69,6 @@ public class Main {
         northraod.addVillager(pnj3);
         southroad.addVillager(pnj2);
 
-        System.out.println(padhiver.areMonstersAlive());
-        int choix = 1;
-
-        switch(choix){
-            case 1:
-                System.out.println("1");
-                break;
-            case 2:
-                System.out.println("2");
-        }
-
         Job playerJob = null;
         String playerName;
         while(true){
