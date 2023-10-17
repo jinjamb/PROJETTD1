@@ -5,6 +5,9 @@ PARTICIPANTS:
     -CHANTOISEAU Sacha
 
 DESCRIPTION GÉNÉRALE:
+informations préalable: 
+    - Pour faire fonctionner le projet il faut compiler tous les éléments, par exmple avec javac (javac ChmVersSrc/Game/*.java -d ChmVersDest).
+    - Pour une meilleure experience jouer en plein écran.
 
 Nous avons suivi l'énoncé du TD1 et avons implémenté le système de combat en tour par tour afin d'avoir une expérience un peu plus interactive.
 Nous avons également choisi de créer un affichage pour les PNJ, lieux, monstres et métiers afin de rendre l'expérience plus immersive pour le joueur.
