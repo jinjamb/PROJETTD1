@@ -37,7 +37,7 @@ public class Padhiver extends Places{
         "|                   |&&&                   &&&                 &                                     \r\n" + //
         "| 4.EEEEEEEEEEEEEE  |                    &&&                   &                                     \r\n" + //
         "|   eeeeeeeeeeee    |                  &&&&                  &&&                                     \r\n" + //
-        "|                   |                  &&                    &&                                      \r\n" + //
+        "| 5.Quiter le jeu   |                  &&                    &&                                      \r\n" + //
         "=-=-=-=-=-=-=-=-=-=-=                                      &&&&                                      \r\n" + //
         "";
     }

@@ -170,6 +170,9 @@ public class Main {
                         System.out.println("Pas de Villageois ici!");
                         print=false;
                     }
+                }else if(choice == 5){
+                    System.out.println("A plus!");
+                    break;
                 }else{
                     System.out.println("Choix invalide. Veuillez entrer un numéro valide.");
                     print=false;
@@ -180,9 +183,9 @@ public class Main {
             }
 
         }
-        if(joueur.getHP()<=0){
+        if(joueur.getLevel()<=0){
             Show.fin(joueur,false ,scanner);
-        }else{
+        }else if(joueur.getLevel()>=10){
             Show.fin(joueur,true ,scanner);
         }
 
@@ -291,11 +294,6 @@ public class Main {
                     if(m.getManaMax()>0){
                         if(m.spell(p)){
                             mobdmg=m.getMagicDmg();
-                            
-                            if(p.getJob().getName().equals("Guerrier")){
-                                mobdmg-=2;
-                                infosup1="L'armure du Guerrier reduit de 2 les dégats.";
-                            }
                             if(m.getName()=="Angmar"){
                                 infosup2=", et il récupère 6 HP";
                             }
@@ -303,10 +301,18 @@ public class Main {
                         }else{
                             mobdmg=m.getDmg();
                             MobAttac=m.getAttakName();
+                            if(p.getJob().getName().equals("Guerrier")){
+                                mobdmg-=2;
+                                infosup1="L'armure du Guerrier reduit de 2 les dégats.";
+                            }
                         }
                     }else{
                         mobdmg=m.getDmg();
                         MobAttac=m.getAttakName();
+                        if(p.getJob().getName().equals("Guerrier")){
+                                mobdmg-=2;
+                                infosup1="(l'armure du Guerrier a reduit de 2 les dégats.)";
+                        }
                     }
                     m.hit(p,mobdmg);
                 }
